@@ -448,9 +448,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- GALLERY -->
 <div id="page-gallery" class="page">
   <div class="ptitle">Галерея</div>
-  <div class="psub">Файлы и фото (публичные ссылки с Яндекс Диска)</div>
+  <div class="psub">Файлы и фото — загружаются на Яндекс Диск автоматически</div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="ch"><span class="ct">Загрузить файл на Яндекс Диск</span></div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:8px;padding:10px 18px;background:var(--gl);color:var(--green);border:.5px solid #9FE1CB;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500">
+        📁 Выбрать файл
+        <input type="file" id="yd-file" style="display:none" onchange="uploadToYandex()">
+      </label>
+      <div id="yd-status" style="font-size:13px;color:var(--muted)">Выберите файл для загрузки на Яндекс Диск</div>
+    </div>
+    <div id="yd-progress" style="display:none;margin-top:10px">
+      <div style="height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+        <div id="yd-bar" style="height:4px;background:var(--green);border-radius:2px;width:0%;transition:width .3s"></div>
+      </div>
+    </div>
+  </div>
   <div class="card">
-    <div class="ch"><span class="ct">Все файлы</span><button class="ca" onclick="openFileModal()">+ добавить</button></div>
+    <div class="ch"><span class="ct">Все файлы</span><button class="ca" onclick="openFileModal()">+ добавить ссылку вручную</button></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <button onclick="filterGallery('')" class="stab on" id="gf-all">Все</button>
+      <button onclick="filterGallery('image')" class="stab" id="gf-image">📷 Фото</button>
+      <button onclick="filterGallery('pdf')" class="stab" id="gf-pdf">📄 PDF</button>
+      <button onclick="filterGallery('doc')" class="stab" id="gf-doc">📝 Документы</button>
+    </div>
     <div class="gal-grid" id="gal-grid"></div>
   </div>
 </div>
@@ -525,9 +546,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="modal-bg" id="modal-file">
   <div class="modal">
-    <h3>Добавить файл</h3>
-    <div class="frow"><label>Название</label><input id="fi-name" placeholder="фото.jpg"></div>
-    <div class="frow"><label>Ссылка (Яндекс Диск — публичная)</label><input id="fi-url" placeholder="https://disk.yandex.ru/..."></div>
+    <h3>Добавить ссылку вручную</h3>
+    <div class="frow"><label>Название файла</label><input id="fi-name" placeholder="фото.jpg"></div>
+    <div class="frow"><label>Публичная ссылка</label><input id="fi-url" placeholder="https://disk.yandex.ru/..."></div>
     <div class="frow"><label>Тип</label><select id="fi-type"><option value="image">Фото</option><option value="pdf">PDF</option><option value="doc">Документ</option></select></div>
     <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-file')">Отмена</button><button class="btn-primary" onclick="saveFile()">Сохранить</button></div>
   </div>
@@ -1219,20 +1240,102 @@ async function saveAiFood(){
   }catch(e){toast('Ошибка: '+e.message);}
 }
 
-// GALLERY
+// GALLERY + ЯНДЕКС ДИСК
+const YD_TOKEN='y0__wgBEJjit54CGLGVRCD9jrqEGDDfjtueCDBd4F89UvH8vkFXc2wBcKfaOpRI';
+const YD_FOLDER='Life OS';
+let galFilter='';
+
 async function loadGallery(){
   try{files=await sb('files',{order:'created_at.desc'});renderGallery();}catch(e){console.error(e);}
 }
+
+function filterGallery(type){
+  galFilter=type;
+  document.querySelectorAll('[id^="gf-"]').forEach(b=>b.classList.remove('on'));
+  document.getElementById('gf-'+(type||'all')).classList.add('on');
+  renderGallery();
+}
+
 function renderGallery(){
   const icons={image:'🖼',pdf:'📄',doc:'📝',video:'🎬'};
   const el=document.getElementById('gal-grid');
-  el.innerHTML=(files.length?files.map(f=>`<div class="gal-item" onclick="window.open('${f.url}','_blank')">
-    <div class="gal-thumb" style="font-size:32px">${icons[f.file_type]||'📁'}</div>
-    <div class="gal-name">${f.name}</div></div>`).join(''):'')+
-    `<div class="gal-item" onclick="openFileModal()" style="border:1.5px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:var(--hint);font-size:12px;cursor:pointer">
-    <span style="font-size:24px;margin-bottom:6px">+</span>Добавить файл</div>`;
+  const list=galFilter?files.filter(f=>f.file_type===galFilter):files;
+  el.innerHTML=list.map(f=>`
+    <div class="gal-item" onclick="window.open('${f.url}','_blank')" title="${f.name}">
+      <div class="gal-thumb" style="font-size:32px;position:relative">
+        ${f.file_type==='image'&&f.preview_url?`<img src="${f.preview_url}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;font-size:32px;align-items:center;justify-content:center;width:100%;height:100%">🖼</span>`:icons[f.file_type]||'📁'}
+      </div>
+      <div class="gal-name">${f.name}</div>
+      <div style="display:flex;justify-content:space-between;padding:0 8px 6px;font-size:10px;color:var(--hint)">
+        <span>${f.file_type}</span>
+        <button onclick="event.stopPropagation();deleteFile('${f.id}')" style="background:none;border:none;cursor:pointer;color:var(--hint);font-size:11px">✕</button>
+      </div>
+    </div>`).join('')+
+    `<div class="gal-item" onclick="document.getElementById('yd-file').click()" style="border:1.5px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:var(--hint);font-size:12px;cursor:pointer">
+    <span style="font-size:28px;margin-bottom:6px">☁️</span>Загрузить</div>`;
 }
+
+async function uploadToYandex(){
+  const file=document.getElementById('yd-file').files[0];
+  if(!file)return;
+  const status=document.getElementById('yd-status');
+  const bar=document.getElementById('yd-bar');
+  const prog=document.getElementById('yd-progress');
+  prog.style.display='block';bar.style.width='10%';
+  status.textContent='Создаю папку на Яндекс Диске...';
+  try{
+    // Создаём папку если нет
+    await fetch(`https://cloud-api.yandex.net/v1/disk/resources?path=${encodeURIComponent(YD_FOLDER)}`,{
+      method:'PUT',headers:{'Authorization':'OAuth '+YD_TOKEN}
+    });
+    bar.style.width='25%';
+    status.textContent='Получаю ссылку для загрузки...';
+    const path=`${YD_FOLDER}/${file.name}`;
+    // Получаем URL для загрузки
+    const urlRes=await fetch(`https://cloud-api.yandex.net/v1/disk/resources/upload?path=${encodeURIComponent(path)}&overwrite=true`,{
+      headers:{'Authorization':'OAuth '+YD_TOKEN}
+    });
+    const urlData=await urlRes.json();
+    if(!urlData.href)throw new Error('Не удалось получить ссылку для загрузки');
+    bar.style.width='40%';
+    status.textContent='Загружаю файл...';
+    // Загружаем файл
+    await fetch(urlData.href,{method:'PUT',body:file});
+    bar.style.width='70%';
+    status.textContent='Публикую файл...';
+    // Публикуем файл
+    await fetch(`https://cloud-api.yandex.net/v1/disk/resources/publish?path=${encodeURIComponent(path)}`,{
+      method:'PUT',headers:{'Authorization':'OAuth '+YD_TOKEN}
+    });
+    // Получаем публичную ссылку
+    const infoRes=await fetch(`https://cloud-api.yandex.net/v1/disk/resources?path=${encodeURIComponent(path)}`,{
+      headers:{'Authorization':'OAuth '+YD_TOKEN}
+    });
+    const info=await infoRes.json();
+    const publicUrl=info.public_url;
+    bar.style.width='90%';
+    status.textContent='Сохраняю в галерею...';
+    // Определяем тип файла
+    const ext=file.name.split('.').pop().toLowerCase();
+    const type=(['jpg','jpeg','png','gif','webp','heic'].includes(ext)?'image':ext==='pdf'?'pdf':'doc');
+    // Сохраняем в Supabase
+    const r=await sb('files',{method:'POST',body:{name:file.name,url:publicUrl||`https://disk.yandex.ru/`,preview_url:type==='image'?publicUrl:null,file_type:type},order:''});
+    files.unshift(r[0]);
+    bar.style.width='100%';
+    status.textContent='✅ '+file.name+' загружен на Яндекс Диск!';
+    renderGallery();
+    toast('Файл загружен: '+file.name);
+    setTimeout(()=>{prog.style.display='none';bar.style.width='0%';status.textContent='Выберите файл для загрузки на Яндекс Диск';},3000);
+  }catch(e){
+    bar.style.width='0%';prog.style.display='none';
+    status.textContent='❌ Ошибка: '+e.message;
+    toast('Ошибка загрузки: '+e.message);
+  }
+  document.getElementById('yd-file').value='';
+}
+
 function openFileModal(){document.getElementById('fi-name').value='';document.getElementById('fi-url').value='';openModal('modal-file');}
+
 async function saveFile(){
   const name=document.getElementById('fi-name').value.trim();const url=document.getElementById('fi-url').value.trim();
   if(!name||!url){toast('Заполните все поля');return;}
@@ -1240,6 +1343,14 @@ async function saveFile(){
     const r=await sb('files',{method:'POST',body:{name,url,file_type:document.getElementById('fi-type').value},order:''});
     files.unshift(r[0]);closeModal('modal-file');renderGallery();toast('Файл добавлен');
   }catch(e){toast('Ошибка: '+e.message);}
+}
+
+async function deleteFile(id){
+  if(!confirm('Удалить из галереи?'))return;
+  try{
+    await sb('files',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
+    files=files.filter(f=>f.id!=id);renderGallery();toast('Удалено');
+  }catch(e){toast('Ошибка');}
 }
 
 // GLOBAL SEARCH
