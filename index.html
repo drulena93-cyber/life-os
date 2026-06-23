@@ -7,8 +7,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4f3f0;--surface:#fff;--border:rgba(0,0,0,.08);--text:#1a1a1a;--muted:#6b6b6b;--hint:#aaa;
-  --accent:#534AB7;--al:#EEEDFE;--am:#AFA9EC;
+  --bg:#f7f7f8;--surface:#ffffff;--border:rgba(0,0,0,.1);--text:#111111;--muted:#555555;--hint:#999;
+  --accent:#4338CA;--al:#EEF2FF;--am:#A5B4FC;
   --green:#1D9E75;--gl:#E1F5EE;
   --orange:#D85A30;--ol:#FAECE7;
   --amber:#BA7517;--aml:#FAEEDA;
@@ -105,7 +105,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .toolbar{display:flex;gap:3px;margin-bottom:12px;padding-bottom:12px;border-bottom:.5px solid var(--border);flex-wrap:wrap}
 .tb{background:none;border:.5px solid var(--border);border-radius:5px;padding:4px 8px;cursor:pointer;font-size:12px;color:var(--muted);font-family:inherit}
 .tb:hover{background:var(--bg);color:var(--text)}
-.nbody{flex:1;border:none;outline:none;background:transparent;color:var(--text);font-size:14px;line-height:1.8;resize:none;width:100%;min-height:280px;font-family:inherit}
+.nbody{flex:1;border:none;outline:none;background:transparent;color:var(--text);font-size:13px;line-height:1.6;resize:none;width:100%;min-height:280px;font-family:inherit}
 .nsave-row{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 .btn-save{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:inherit}
 .btn-ghost{background:none;border:.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
@@ -202,6 +202,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .btn-primary{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:13px;cursor:pointer;font-family:inherit}
 .btn-secondary{background:none;border:.5px solid var(--border);border-radius:7px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
 .ai-res{background:var(--gl);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;color:#0F6E56;display:none}
+/* Kanban */
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.kb-col{background:var(--bg);border-radius:10px;padding:12px;min-height:300px}
+.kb-col-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;padding-bottom:8px;border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.kb-card{background:var(--surface);border:.5px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:box-shadow .15s}
+.kb-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.kb-card-title{font-size:13px;font-weight:500;margin-bottom:4px}
+.kb-card-meta{font-size:11px;color:var(--muted)}
+.view-switcher{display:flex;gap:4px;margin-bottom:14px}
+.vsw{padding:5px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:.5px solid var(--border);background:var(--surface);color:var(--muted)}
+.vsw.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* Markdown render */
+.md-render{font-size:13px;line-height:1.7;color:var(--text);flex:1;overflow-y:auto}
+.md-render h1{font-size:18px;font-weight:600;margin:16px 0 8px}
+.md-render h2{font-size:15px;font-weight:600;margin:14px 0 6px}
+.md-render h3{font-size:13px;font-weight:600;margin:12px 0 4px}
+.md-render p{margin-bottom:8px}
+.md-render ul{padding-left:18px;margin-bottom:8px}
+.md-render li{margin-bottom:3px}
+.md-render strong{font-weight:600}
+.md-render em{font-style:italic}
+.md-render hr{border:none;border-top:.5px solid var(--border);margin:12px 0}
+.md-render code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:12px;font-family:monospace}
+.md-render a.wiki-link{color:var(--accent);text-decoration:underline;cursor:pointer;font-weight:500}
+.note-view-toggle{display:flex;gap:4px;margin-bottom:10px}
+.nvt{font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer;border:.5px solid var(--border);background:none;color:var(--muted);font-family:inherit}
+.nvt.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* Питание по приёмам */
+.meal-type-section{margin-bottom:12px}
+.meal-type-header{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;padding:6px 0;border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.meal-type-add{font-size:11px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:inherit}
+/* Рецепты */
+.recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px}
+.recipe-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.recipe-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.1)}
+.recipe-img{height:80px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.recipe-body{padding:8px 10px}
+.recipe-name{font-size:12px;font-weight:500;margin-bottom:3px}
+.recipe-kcal{font-size:11px;color:var(--green);font-weight:500}
+.recipe-tag{font-size:10px;background:var(--al);color:var(--accent);padding:1px 6px;border-radius:10px;display:inline-block;margin-top:4px;margin-right:3px}
+/* Подпапки */
+.nfolder-sub{padding:5px 14px 5px 30px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:var(--muted)}
+.nfolder-sub:hover{background:var(--bg)}
+.nfolder-sub.on{background:var(--al);color:var(--accent)}
+/* Inline add form */
+.inline-form{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:12px;border:.5px solid var(--border);display:none}
+.inline-form.show{display:block}
 /* Mobile nav */
 .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:.5px solid var(--border);padding:6px 0 10px;z-index:100;justify-content:space-around}
 .mob-it{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 8px;color:var(--hint);font-size:10px}
@@ -330,17 +377,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="pbtn" onclick="stopPomo()">✕ Стоп</button>
     </div>
   </div>
-  <div class="smart-tabs" id="smart-tabs">
-    <div class="stab on" data-filter="today" onclick="setFilter('today')">Сегодня</div>
-    <div class="stab" data-filter="tomorrow" onclick="setFilter('tomorrow')">Завтра</div>
-    <div class="stab overdue" data-filter="overdue" onclick="setFilter('overdue')">Просроченные</div>
-    <div class="stab" data-filter="week" onclick="setFilter('week')">7 дней</div>
-    <div class="stab" data-filter="all" onclick="setFilter('all')">Все</div>
-    <div class="stab" data-filter="done" onclick="setFilter('done')">Выполненные</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <div class="smart-tabs" id="smart-tabs" style="margin-bottom:0">
+      <div class="stab on" data-filter="today" onclick="setFilter('today')">Сегодня</div>
+      <div class="stab" data-filter="tomorrow" onclick="setFilter('tomorrow')">Завтра</div>
+      <div class="stab overdue" data-filter="overdue" onclick="setFilter('overdue')">Просроченные</div>
+      <div class="stab" data-filter="week" onclick="setFilter('week')">7 дней</div>
+      <div class="stab" data-filter="all" onclick="setFilter('all')">Все</div>
+      <div class="stab" data-filter="done" onclick="setFilter('done')">Выполненные</div>
+    </div>
+    <div class="view-switcher">
+      <div class="vsw on" onclick="setTaskView('list')">☰ Список</div>
+      <div class="vsw" onclick="setTaskView('kanban')">⊞ Канбан</div>
+      <div class="vsw" onclick="setTaskView('calendar')">📅 Календарь</div>
+    </div>
   </div>
   <div class="card">
-    <div class="ch"><span class="ct" id="tasks-title">Сегодня</span><button class="ca" onclick="openTaskModal()">+ добавить</button></div>
+    <div class="ch">
+      <span class="ct" id="tasks-title">Сегодня</span>
+      <button class="ca" onclick="toggleInlineTaskForm()">+ добавить</button>
+    </div>
+    <div class="inline-form" id="inline-task-form">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input id="it-title" placeholder="Название задачи" style="flex:1;font-size:13px;padding:7px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+        <select id="it-prio" style="font-size:12px;padding:7px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+          <option value="medium">Средний</option><option value="high">Высокий</option><option value="low">Низкий</option>
+        </select>
+        <input type="datetime-local" id="it-date" style="font-size:12px;padding:7px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="it-tags" placeholder="Теги через запятую" style="flex:1;font-size:12px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+        <button onclick="saveInlineTask()" style="background:var(--accent);color:#fff;border:none;border-radius:7px;padding:6px 16px;font-size:13px;cursor:pointer;font-family:inherit">Сохранить</button>
+        <button onclick="toggleInlineTaskForm()" style="background:none;border:.5px solid var(--border);border-radius:7px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit">Отмена</button>
+      </div>
+    </div>
     <div id="tasks-list"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
+    <div id="tasks-kanban" style="display:none"></div>
   </div>
 </div>
 
@@ -427,21 +499,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- NUTRITION -->
 <div id="page-nutrition" class="page">
   <div class="ptitle">Питание</div>
-  <div class="card">
-    <div class="ch"><span class="ct">Сегодня</span>
-      <div style="display:flex;gap:8px">
-        <button class="ca" onclick="openAiFood()">📷 Фото → AI</button>
-        <button class="ca" onclick="openFoodModal()">+ добавить</button>
+  <div class="two">
+    <div class="card">
+      <div class="ch"><span class="ct">Сегодня — <span id="kcal-now">0</span> / 1450 ккал</span>
+        <div style="display:flex;gap:6px">
+          <button class="ca" onclick="openAiFood()">📷 AI</button>
+        </div>
+      </div>
+      <div class="kbar" style="margin-bottom:10px"><div class="kfill" id="kcal-fill" style="width:0%"></div></div>
+      <div class="macro-row">
+        <div class="mbox"><div class="mval" id="mac-p">0г</div><div class="mlbl">Белки</div></div>
+        <div class="mbox"><div class="mval" id="mac-c">0г</div><div class="mlbl">Углеводы</div></div>
+        <div class="mbox"><div class="mval" id="mac-f">0г</div><div class="mlbl">Жиры</div></div>
+      </div>
+      <!-- Приёмы пищи -->
+      <div id="meal-sections"></div>
+      <!-- Форма добавления inline -->
+      <div class="inline-form" id="inline-food-form">
+        <div style="font-size:12px;font-weight:500;margin-bottom:8px;color:var(--muted)" id="inline-food-type-label">Завтрак</div>
+        <input id="if-name" placeholder="Название блюда" style="width:100%;font-size:13px;padding:7px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;margin-bottom:8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:8px">
+          <input type="number" id="if-kcal" placeholder="Ккал" style="font-size:12px;padding:6px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+          <input type="number" id="if-prot" placeholder="Белки г" style="font-size:12px;padding:6px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+          <input type="number" id="if-carb" placeholder="Углев г" style="font-size:12px;padding:6px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+          <input type="number" id="if-fat" placeholder="Жиры г" style="font-size:12px;padding:6px 8px;border:.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);outline:none;font-family:inherit">
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onclick="saveInlineFood()" style="background:var(--accent);color:#fff;border:none;border-radius:7px;padding:6px 16px;font-size:13px;cursor:pointer;font-family:inherit">Сохранить</button>
+          <button onclick="closeInlineFood()" style="background:none;border:.5px solid var(--border);border-radius:7px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit">Отмена</button>
+        </div>
       </div>
     </div>
-    <div class="knums"><span id="kcal-now">0 ккал</span><span>цель: 1800</span></div>
-    <div class="kbar"><div class="kfill" id="kcal-fill" style="width:0%"></div></div>
-    <div class="macro-row">
-      <div class="mbox"><div class="mval" id="mac-p">0г</div><div class="mlbl">Белки</div></div>
-      <div class="mbox"><div class="mval" id="mac-c">0г</div><div class="mlbl">Углеводы</div></div>
-      <div class="mbox"><div class="mval" id="mac-f">0г</div><div class="mlbl">Жиры</div></div>
+    <div class="card">
+      <div class="ch"><span class="ct">💡 Рецепты ПП</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Подобраны под твои параметры · цель 1450 ккал/день</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="recipe-filter-row">
+        <span class="recipe-tag" style="cursor:pointer;padding:4px 10px" onclick="filterRecipes('')">Все</span>
+        <span class="recipe-tag" style="cursor:pointer;padding:4px 10px" onclick="filterRecipes('завтрак')">Завтрак</span>
+        <span class="recipe-tag" style="cursor:pointer;padding:4px 10px" onclick="filterRecipes('обед')">Обед</span>
+        <span class="recipe-tag" style="cursor:pointer;padding:4px 10px" onclick="filterRecipes('ужин')">Ужин</span>
+        <span class="recipe-tag" style="cursor:pointer;padding:4px 10px" onclick="filterRecipes('перекус')">Перекус</span>
+      </div>
+      <div class="recipe-grid" id="recipe-grid"></div>
     </div>
-    <div id="meals-list"></div>
   </div>
 </div>
 
@@ -574,6 +674,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <span class="icon-opt" data-ico="🌿" onclick="pickIcon('🌿')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🌿</span>
       </div>
       <input id="fold-ico" value="📁" style="margin-top:8px;font-size:13px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;width:80px">
+    </div>
+    <div class="frow"><label>Вложить в папку (необязательно)</label>
+      <select id="fold-parent" style="width:100%;font-size:13px;padding:8px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Без родителя (корневая)</option>
+      </select>
     </div>
     <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-folder')">Отмена</button><button class="btn-primary" onclick="saveFolder()">Создать</button></div>
   </div>
@@ -965,6 +1070,8 @@ async function deleteNote(id){
 function openFolderModal(){
   document.getElementById('fold-name').value='';selectedIcon='📁';
   document.querySelectorAll('.icon-opt').forEach(o=>o.style.border='2px solid transparent');
+  const sel=document.getElementById('fold-parent');
+  sel.innerHTML='<option value="">Без родителя (корневая)</option>'+(folders||[]).filter(f=>!f.parent_id).map(f=>`<option value="${f.id}">${f.icon||'📁'} ${f.name}</option>`).join('');
   openModal('modal-folder');
 }
 function pickIcon(ico){
@@ -1370,6 +1477,296 @@ async function globalSearch(){
     <div class="gres-prev">${r.preview||''}</div></div>`).join('');
 }
 
+
+// ── TASK VIEW SWITCHER ──
+let taskView = 'list';
+function setTaskView(v) {
+  taskView = v;
+  document.querySelectorAll('.vsw').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.vsw').forEach(b => { if(b.textContent.includes(v==='list'?'Список':v==='kanban'?'Канбан':'Календарь')) b.classList.add('on'); });
+  if(v==='list') { document.getElementById('tasks-list').style.display=''; document.getElementById('tasks-kanban').style.display='none'; renderTasks(); }
+  if(v==='kanban') { document.getElementById('tasks-list').style.display='none'; document.getElementById('tasks-kanban').style.display=''; renderKanban(); }
+  if(v==='calendar') { document.getElementById('tasks-list').style.display='none'; document.getElementById('tasks-kanban').style.display='none'; go('calendar'); }
+}
+
+function renderKanban() {
+  const today_ = today(); const tom = tomorrow();
+  const cols = [
+    { id:'today', title:'Сегодня', color:'var(--accent)', tasks: tasks.filter(t=>!t.done&&t.due_date&&t.due_date.startsWith(today_)) },
+    { id:'tomorrow', title:'Завтра', color:'var(--green)', tasks: tasks.filter(t=>!t.done&&t.due_date&&t.due_date.startsWith(tom)) },
+    { id:'overdue', title:'Просроченные', color:'var(--red)', tasks: tasks.filter(t=>!t.done&&t.due_date&&t.due_date<today_+'T') },
+    { id:'nodate', title:'Без даты', color:'var(--muted)', tasks: tasks.filter(t=>!t.done&&!t.due_date) },
+  ];
+  const el = document.getElementById('tasks-kanban');
+  el.innerHTML = '<div class="kanban">'+cols.map(col=>`
+    <div class="kb-col">
+      <div class="kb-col-title" style="color:${col.color}">${col.title} <span style="background:${col.color};color:#fff;border-radius:10px;padding:1px 7px;font-size:10px">${col.tasks.length}</span></div>
+      ${col.tasks.map(t=>`
+        <div class="kb-card" draggable="true" ondragstart="dragTask('${t.id}')">
+          <div class="kb-card-title">${t.title}</div>
+          <div class="kb-card-meta">
+            <span class="prio p${t.priority==='high'?'h':t.priority==='low'?'l':'m'}">${t.priority==='high'?'высокий':t.priority==='low'?'низкий':'средний'}</span>
+            ${t.due_date?'<span style="margin-left:6px">'+fmtDate(t.due_date)+'</span>':''}
+          </div>
+        </div>`).join('')}
+      <div ondragover="event.preventDefault()" ondrop="dropTask(event,'${col.id}')" style="min-height:40px;border:1.5px dashed var(--border);border-radius:6px;margin-top:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--hint)">Перетащи сюда</div>
+    </div>`).join('')+'</div>';
+}
+
+let draggedTaskId = null;
+function dragTask(id) { draggedTaskId = id; }
+async function dropTask(e, col) {
+  e.preventDefault();
+  if(!draggedTaskId) return;
+  let newDate = null;
+  if(col==='today') newDate = today()+'T09:00:00';
+  else if(col==='tomorrow') newDate = tomorrow()+'T09:00:00';
+  else if(col==='nodate') newDate = null;
+  try {
+    await sb('tasks',{method:'PATCH',filter:`id=eq.${draggedTaskId}&`,body:{due_date:newDate},order:''});
+    tasks = tasks.map(t=>t.id==draggedTaskId?{...t,due_date:newDate}:t);
+    renderKanban(); renderDashTasks(); toast('Задача перенесена');
+  } catch(e) { toast('Ошибка: '+e.message); }
+  draggedTaskId = null;
+}
+
+function toggleInlineTaskForm() {
+  const f = document.getElementById('inline-task-form');
+  f.classList.toggle('show');
+  if(f.classList.contains('show')) document.getElementById('it-title').focus();
+}
+
+async function saveInlineTask() {
+  const title = document.getElementById('it-title').value.trim();
+  if(!title) { toast('Введите название'); return; }
+  const tags = document.getElementById('it-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const due = document.getElementById('it-date').value;
+  try {
+    const r = await sb('tasks',{method:'POST',body:{title,priority:document.getElementById('it-prio').value,due_date:due?new Date(due).toISOString():today()+'T00:00:00',tags},order:''});
+    tasks.unshift(r[0]);
+    document.getElementById('it-title').value='';document.getElementById('it-tags').value='';
+    document.getElementById('inline-task-form').classList.remove('show');
+    renderTasks(); renderKanban(); renderDashTasks(); renderDashMetrics(); toast('Задача добавлена');
+  } catch(e) { toast('Ошибка: '+e.message); }
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') { document.getElementById('inline-task-form').classList.remove('show'); document.getElementById('inline-food-form').classList.remove('show'); } });
+
+// ── MARKDOWN RENDER ──
+function renderMarkdown(text) {
+  if(!text) return '';
+  let html = text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h1>$1</h1>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/_(.+?)_/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>')
+    .replace(/^---$/gm,'<hr>')
+    .replace(/\[\[([^\]]+)\]\]/g,'<a class="wiki-link" onclick="openNoteByTitle('$1')">[[  $1]]</a>');
+  // Списки
+  const lines = html.split('
+');
+  const out = []; let inList = false;
+  for(const line of lines) {
+    if(/^- (.+)/.test(line)) { if(!inList){out.push('<ul>');inList=true;} out.push('<li>'+line.replace(/^- /,'')+'</li>'); }
+    else { if(inList){out.push('</ul>');inList=false;} out.push(line?'<p>'+line+'</p>':''); }
+  }
+  if(inList) out.push('</ul>');
+  return out.join('');
+}
+
+function openNoteByTitle(title) {
+  const n = notes.find(x=>(x.title||'').toLowerCase()===title.toLowerCase());
+  if(n) { openNoteEditor(n.id); } else { toast('Заметка "'+title+'" не найдена'); }
+}
+
+// Патчим openNoteEditor — добавляем переключатель просмотр/редактор
+const _origOpenNoteEditor = openNoteEditor;
+function openNoteEditor(id) {
+  currentNote = notes.find(n=>n.id===id); if(!currentNote) return;
+  renderNotesList();
+  const ed = document.getElementById('note-editor');
+  const tags = currentNote.tags||[];
+  const folderOpts = (folders||[]).map(f=>`<option value="${f.id}" ${currentNote.folder_id===f.id?'selected':''}>${f.icon||'📁'} ${f.name}</option>`).join('');
+  ed.innerHTML = `
+    <div class="note-view-toggle">
+      <button class="nvt on" id="nvt-edit" onclick="switchNoteView('edit')">✏️ Редактор</button>
+      <button class="nvt" id="nvt-view" onclick="switchNoteView('view')">👁 Просмотр</button>
+    </div>
+    <input class="ntitle" id="n-title" placeholder="Заголовок" value="${(currentNote.title||'').replace(/"/g,'&quot;')}">
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <select id="n-folder" style="font-size:12px;padding:5px 8px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Без папки</option>${folderOpts}
+      </select>
+    </div>
+    <div class="ntagrow" id="ntagrow">${tags.map(t=>`<span class="ntag" onclick="removeNTag('${t}')">${t} ×</span>`).join('')}<input class="ntaginp" id="ntaginp" placeholder="+ тег" onkeydown="addNTag(event)"></div>
+    <div class="toolbar" id="note-toolbar">
+      <button class="tb" onclick="fmt('**','**')"><b>Ж</b></button>
+      <button class="tb" onclick="fmt('_','_')"><i>К</i></button>
+      <button class="tb" onclick="fmt('\n# ','')">Н1</button>
+      <button class="tb" onclick="fmt('\n## ','')">Н2</button>
+      <button class="tb" onclick="fmt('\n- ','')">Список</button>
+      <button class="tb" onclick="fmt('\n---\n','')">———</button>
+      <button class="tb" onclick="fmt('[[',']]')">[[Связь]]</button>
+    </div>
+    <textarea class="nbody" id="nbody" style="font-size:13px;line-height:1.6">${currentNote.content||''}</textarea>
+    <div class="md-render" id="md-render" style="display:none;min-height:280px;padding:4px 0"></div>
+    <div class="nsave-row">
+      <button class="btn-ghost" onclick="deleteNote('${currentNote.id}')">Удалить</button>
+      <button class="btn-save" onclick="saveNote()">Сохранить</button>
+    </div>`;
+}
+
+function switchNoteView(mode) {
+  const ta = document.getElementById('nbody');
+  const md = document.getElementById('md-render');
+  const tb = document.getElementById('note-toolbar');
+  if(mode==='view') {
+    const content = ta ? ta.value : (currentNote.content||'');
+    md.innerHTML = renderMarkdown(content);
+    ta.style.display='none'; md.style.display='block';
+    if(tb) tb.style.display='none';
+    document.getElementById('nvt-edit').classList.remove('on');
+    document.getElementById('nvt-view').classList.add('on');
+  } else {
+    ta.style.display=''; md.style.display='none';
+    if(tb) tb.style.display='';
+    document.getElementById('nvt-edit').classList.add('on');
+    document.getElementById('nvt-view').classList.remove('on');
+    ta.focus();
+  }
+}
+
+// ── ПИТАНИЕ ПО ПРИЁМАМ ──
+const MEAL_TYPES = ['Завтрак','Обед','Ужин','Перекус'];
+let currentFoodType = 'Завтрак';
+
+function renderNutrition() {
+  const kcal = meals.reduce((s,m)=>s+m.calories,0);
+  const prot = meals.reduce((s,m)=>s+(+m.protein||0),0);
+  const carb = meals.reduce((s,m)=>s+(+m.carbs||0),0);
+  const fat  = meals.reduce((s,m)=>s+(+m.fat||0),0);
+  document.getElementById('kcal-now').textContent = kcal;
+  document.getElementById('kcal-fill').style.width = Math.min(Math.round(kcal/1450*100),100)+'%';
+  document.getElementById('mac-p').textContent = Math.round(prot)+'г';
+  document.getElementById('mac-c').textContent = Math.round(carb)+'г';
+  document.getElementById('mac-f').textContent = Math.round(fat)+'г';
+  const el = document.getElementById('meal-sections');
+  el.innerHTML = MEAL_TYPES.map(type => {
+    const typeMeals = meals.filter(m=>(m.meal_type||'Завтрак')===type);
+    const typeKcal = typeMeals.reduce((s,m)=>s+m.calories,0);
+    return `<div class="meal-type-section">
+      <div class="meal-type-header">
+        <span>${type} · ${typeKcal} ккал</span>
+        <button class="meal-type-add" onclick="openInlineFood('${type}')">+ добавить</button>
+      </div>
+      ${typeMeals.length ? typeMeals.map(m=>`
+        <div class="meal-row">
+          <span class="meal-name">${m.meal_name}</span>
+          <span class="meal-k">${m.calories} ккал · Б${Math.round(m.protein||0)}г У${Math.round(m.carbs||0)}г Ж${Math.round(m.fat||0)}г</span>
+          <button class="meal-del" onclick="deleteMeal('${m.id}')">✕</button>
+        </div>`).join('') : '<div style="color:var(--hint);font-size:12px;padding:6px 0">Пусто</div>'}
+    </div>`;
+  }).join('');
+  renderRecipes('');
+}
+
+function openInlineFood(type) {
+  currentFoodType = type;
+  const f = document.getElementById('inline-food-form');
+  document.getElementById('inline-food-type-label').textContent = type;
+  ['if-name','if-kcal','if-prot','if-carb','if-fat'].forEach(id=>document.getElementById(id).value='');
+  f.classList.add('show');
+  document.getElementById('if-name').focus();
+}
+function closeInlineFood() { document.getElementById('inline-food-form').classList.remove('show'); }
+
+async function saveInlineFood() {
+  const name = document.getElementById('if-name').value.trim();
+  if(!name) { toast('Введите название'); return; }
+  try {
+    const r = await sb('nutrition_log',{method:'POST',body:{meal_name:name,meal_type:currentFoodType,calories:+document.getElementById('if-kcal').value||0,protein:+document.getElementById('if-prot').value||0,carbs:+document.getElementById('if-carb').value||0,fat:+document.getElementById('if-fat').value||0},order:''});
+    meals.push(r[0]); closeInlineFood(); renderNutrition(); renderDashMeals(); renderDashMetrics(); toast('Добавлено в '+currentFoodType);
+  } catch(e) { toast('Ошибка: '+e.message); }
+}
+
+// ── РЕЦЕПТЫ ──
+const RECIPES = [
+  {name:'Овсянка с ягодами',kcal:280,p:9,c:48,f:5,type:'завтрак',emoji:'🥣',tags:['завтрак','быстро'],desc:'100г овсянки, горсть ягод, 1 ч.л. мёда'},
+  {name:'Творожная запеканка',kcal:220,p:18,c:22,f:6,type:'завтрак',emoji:'🧆',tags:['завтрак','пп'],desc:'250г творога 0%, 2 яйца, 2 ст.л. манки, ваниль'},
+  {name:'Яичница с овощами',kcal:195,p:14,c:8,f:12,type:'завтрак',emoji:'🍳',tags:['завтрак','белок'],desc:'2 яйца, помидор, перец, шпинат'},
+  {name:'Гречка с курицей',kcal:380,p:32,c:42,f:6,type:'обед',emoji:'🍚',tags:['обед','белок'],desc:'150г куриной грудки, 80г гречки, овощи'},
+  {name:'Суп-пюре из тыквы',kcal:140,p:4,c:22,f:4,type:'обед',emoji:'🍲',tags:['обед','лёгкий'],desc:'300г тыквы, морковь, лук, специи'},
+  {name:'Боул с киноа',kcal:420,p:28,c:45,f:10,type:'обед',emoji:'🥗',tags:['обед','пп'],desc:'80г киноа, куриная грудка, авокадо, огурец'},
+  {name:'Рыба с овощами',kcal:290,p:30,c:15,f:8,type:'ужин',emoji:'🐟',tags:['ужин','белок'],desc:'200г трески, цукини, брокколи на пару'},
+  {name:'Индейка с салатом',kcal:310,p:35,c:10,f:10,type:'ужин',emoji:'🥩',tags:['ужин','белок'],desc:'200г филе индейки, листья салата, помидоры'},
+  {name:'Творог с фруктами',kcal:160,p:15,c:18,f:2,type:'перекус',emoji:'🫙',tags:['перекус','быстро'],desc:'150г творога 2%, банан или яблоко'},
+  {name:'Яблоко с миндалём',kcal:170,p:4,c:22,f:8,type:'перекус',emoji:'🍎',tags:['перекус','быстро'],desc:'1 яблоко, 20г миндаля'},
+  {name:'Греческий йогурт',kcal:130,p:12,c:10,f:4,type:'перекус',emoji:'🥛',tags:['перекус','пп'],desc:'150г йогурта без сахара, ложка мёда'},
+  {name:'ПП Брауни на банане',kcal:105,p:7,c:15,f:2.7,type:'перекус',emoji:'🍫',tags:['перекус','сладкое'],desc:'1 яйцо, 2 белка, 220г банана, 25г какао'},
+  {name:'Сырники творожные',kcal:220,p:16,c:24,f:5,type:'завтрак',emoji:'🥞',tags:['завтрак','пп'],desc:'300г творога, 1 яйцо, 2 ст.л. муки, подсластитель'},
+  {name:'Куриный бульон',kcal:80,p:10,c:4,f:2,type:'обед',emoji:'🍜',tags:['обед','лёгкий'],desc:'Куриная грудка, морковь, сельдерей, зелень'},
+];
+
+let recipeFilter = '';
+function filterRecipes(type) { recipeFilter = type; renderRecipes(type); }
+function renderRecipes(type) {
+  const list = type ? RECIPES.filter(r=>r.type===type) : RECIPES;
+  const el = document.getElementById('recipe-grid');
+  if(!el) return;
+  el.innerHTML = list.map(r=>`
+    <div class="recipe-card" onclick="addRecipeToMeal('${r.name}',${r.kcal},${r.p},${r.c},${r.f},'${r.type}')">
+      <div class="recipe-img">${r.emoji}</div>
+      <div class="recipe-body">
+        <div class="recipe-name">${r.name}</div>
+        <div class="recipe-kcal">${r.kcal} ккал · Б${r.p}г У${r.c}г Ж${r.f}г</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">${r.desc}</div>
+        ${r.tags.map(t=>`<span class="recipe-tag">${t}</span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+async function addRecipeToMeal(name,kcal,p,c,f,type) {
+  const typeMap = {завтрак:'Завтрак',обед:'Обед',ужин:'Ужин',перекус:'Перекус'};
+  const mealType = typeMap[type]||'Завтрак';
+  try {
+    const r = await sb('nutrition_log',{method:'POST',body:{meal_name:name,meal_type:mealType,calories:kcal,protein:p,carbs:c,fat:f},order:''});
+    meals.push(r[0]); renderNutrition(); renderDashMeals(); renderDashMetrics(); toast('✅ '+name+' добавлен в '+mealType);
+  } catch(e) { toast('Ошибка: '+e.message); }
+}
+
+// ── ПОДПАПКИ ──
+async function saveFolder() {
+  const name = document.getElementById('fold-name').value.trim();
+  const icon = document.getElementById('fold-ico').value||selectedIcon;
+  const parentId = document.getElementById('fold-parent').value||null;
+  if(!name){toast('Введите название');return;}
+  try {
+    const r = await sb('note_folders',{method:'POST',body:{name,icon,parent_id:parentId},order:''});
+    folders.push(r[0]); closeModal('modal-folder'); renderFolders(); toast('Папка создана');
+  } catch(e) { toast('Ошибка: '+e.message); }
+}
+
+function renderFolders() {
+  const el = document.getElementById('folders-list');
+  const rootFolders = (folders||[]).filter(f=>!f.parent_id);
+  const subFolders = (folders||[]).filter(f=>f.parent_id);
+  el.innerHTML = `<div class="nfolder ${!selectedFolder?'on':''}" onclick="selectFolder(null)">📋 Все заметки <span style="margin-left:auto;font-size:11px;color:var(--hint)">${notes.length}</span></div>`
+    + rootFolders.map(f=>`
+      <div class="nfolder ${selectedFolder===f.id?'on':''}" onclick="selectFolder('${f.id}')">
+        <span class="nfolder-ico">${f.icon||'📁'}</span> ${f.name}
+        <span style="margin-left:auto;font-size:11px;color:var(--hint)">${notes.filter(n=>n.folder_id===f.id).length}</span>
+      </div>
+      ${subFolders.filter(s=>s.parent_id===f.id).map(s=>`
+        <div class="nfolder-sub ${selectedFolder===s.id?'on':''}" onclick="selectFolder('${s.id}')">
+          ${s.icon||'📄'} ${s.name}
+          <span style="margin-left:auto;font-size:11px;color:var(--hint)">${notes.filter(n=>n.folder_id===s.id).length}</span>
+        </div>`).join('')}
+    `).join('')
+    + `<div class="nfolder" onclick="openFolderModal()" style="color:var(--hint);font-size:11px">+ Новая папка</div>`;
+}
+
 // INIT — создаём таблицы если их нет
 async function initTables(){
   const tables=['events','note_folders'];
@@ -1381,6 +1778,7 @@ async function initTables(){
       }
     }
   }
+  // Проверяем что meal_type и parent_id есть (добавлены через SQL Editor)
 }
 
 initTables();
