@@ -7,936 +7,1164 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4f3f0;
-  --surface:#ffffff;
-  --border:rgba(0,0,0,0.08);
-  --text:#1a1a1a;
-  --muted:#6b6b6b;
-  --hint:#a0a0a0;
-  --accent:#534AB7;
-  --accent-light:#EEEDFE;
-  --accent-mid:#AFA9EC;
-  --green:#1D9E75;
-  --green-light:#E1F5EE;
-  --orange:#D85A30;
-  --orange-light:#FAECE7;
-  --amber:#BA7517;
-  --amber-light:#FAEEDA;
+  --bg:#f4f3f0;--surface:#fff;--border:rgba(0,0,0,.08);--text:#1a1a1a;--muted:#6b6b6b;--hint:#aaa;
+  --accent:#534AB7;--al:#EEEDFE;--am:#AFA9EC;
+  --green:#1D9E75;--gl:#E1F5EE;
+  --orange:#D85A30;--ol:#FAECE7;
+  --amber:#BA7517;--aml:#FAEEDA;
+  --red:#A32D2D;--rl:#FCEBEB;
   --sidebar:220px;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
-
-/* ── Sidebar ── */
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--surface);border-right:0.5px solid var(--border);display:flex;flex-direction:column;z-index:100;overflow-y:auto}
-.logo{padding:18px 16px 14px;font-size:15px;font-weight:500;color:var(--accent);border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:8px}
-.logo svg{width:20px;height:20px;flex-shrink:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--surface);border-right:.5px solid var(--border);display:flex;flex-direction:column;z-index:100;overflow-y:auto}
+.logo{padding:18px 16px 14px;font-size:15px;font-weight:500;color:var(--accent);border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:8px}
 .nav-sec{padding:10px 16px 4px;font-size:10px;color:var(--hint);text-transform:uppercase;letter-spacing:.06em}
-.nav-item{display:flex;align-items:center;gap:9px;padding:8px 12px;margin:1px 8px;font-size:13px;color:var(--muted);cursor:pointer;border-radius:8px;transition:background .12s}
-.nav-item:hover{background:var(--bg);color:var(--text)}
-.nav-item.on{background:var(--accent-light);color:var(--accent);font-weight:500}
-.nav-item svg{width:17px;height:17px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── Main ── */
+.ni{display:flex;align-items:center;gap:9px;padding:8px 12px;margin:1px 8px;font-size:13px;color:var(--muted);cursor:pointer;border-radius:8px;transition:background .12s;user-select:none}
+.ni:hover{background:var(--bg);color:var(--text)}
+.ni.on{background:var(--al);color:var(--accent);font-weight:500}
+.ni .ico{width:17px;height:17px;flex-shrink:0}
 .main{margin-left:var(--sidebar);min-height:100vh;padding:28px 32px 60px}
 .page{display:none}.page.on{display:block}
-.page-title{font-size:20px;font-weight:500;margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--muted);margin-bottom:22px}
-
-/* ── Quick bar ── */
-.quick-bar{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px}
-.quick-label{font-size:11px;color:var(--hint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-.quick-row{display:flex;gap:8px;margin-bottom:8px}
-.quick-row:last-child{margin-bottom:0}
-.q-in{flex:1;font-size:13px;padding:8px 12px;border:0.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
-.q-in:focus{border-color:var(--accent-mid)}
-.q-btn{display:flex;align-items:center;gap:5px;font-size:12px;padding:8px 13px;border:0.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted);cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .12s}
-.q-btn:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid)}
-.q-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.q-btn.green{background:var(--green-light);color:var(--green);border-color:#9FE1CB}
-.q-btn.green:hover{background:#9FE1CB}
-
-/* ── Metrics ── */
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.ptitle{font-size:20px;font-weight:500;margin-bottom:4px}
+.psub{font-size:13px;color:var(--muted);margin-bottom:22px}
+/* Quick bar */
+.qbar{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px}
+.qlabel{font-size:11px;color:var(--hint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.qrow{display:flex;gap:8px;margin-bottom:8px}.qrow:last-child{margin-bottom:0}
+.qin{flex:1;font-size:13px;padding:8px 12px;border:.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
+.qin:focus{border-color:var(--am)}
+.qbtn{display:flex;align-items:center;gap:5px;font-size:12px;padding:8px 13px;border:.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted);cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .12s}
+.qbtn:hover{background:var(--al);color:var(--accent);border-color:var(--am)}
+.qbtn.green{background:var(--gl);color:var(--green);border-color:#9FE1CB}
+/* Metrics */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
 .mc{background:var(--bg);border-radius:8px;padding:14px}
-.mc-lbl{font-size:11px;color:var(--muted);margin-bottom:6px}
-.mc-val{font-size:22px;font-weight:500}
-.mc-sub{font-size:11px;color:var(--hint);margin-top:2px}
-.mc-bar{height:3px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.mc-l{font-size:11px;color:var(--muted);margin-bottom:6px}
+.mc-v{font-size:22px;font-weight:500}
+.mc-s{font-size:11px;color:var(--hint);margin-top:2px}
+.mc-bar{height:3px;background:rgba(0,0,0,.06);border-radius:2px;margin-top:8px;overflow:hidden}
 .mc-fill{height:3px;border-radius:2px;transition:width .4s}
-
-/* ── Cards ── */
-.card{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
-.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.card-title{font-size:13px;font-weight:500;color:var(--text)}
-.card-action{font-size:12px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:inherit}
-.card-action:hover{text-decoration:underline}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-
-/* ── Tasks ── */
-.task-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)}
-.task-row:last-child{border:none}
+/* Cards */
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ct{font-size:13px;font-weight:500}
+.ca{font-size:12px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:inherit}
+.ca:hover{text-decoration:underline}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+/* Tasks */
+.trow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:.5px solid var(--border)}
+.trow:last-child{border:none}
 .chk{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s}
 .chk.done{background:var(--accent);border-color:var(--accent)}
-.chk svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.task-txt{flex:1;font-size:13px}
-.task-txt.done{text-decoration:line-through;color:var(--hint)}
+.ttxt{flex:1;font-size:13px}
+.ttxt.done{text-decoration:line-through;color:var(--hint)}
 .prio{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;flex-shrink:0}
-.ph{background:#FCEBEB;color:#A32D2D}
-.pm{background:var(--amber-light);color:#633806}
-.pl{background:#EAF3DE;color:#27500A}
-.task-del{background:none;border:none;cursor:pointer;color:var(--hint);padding:2px;display:flex;align-items:center;opacity:0;transition:opacity .15s}
-.task-row:hover .task-del{opacity:1}
-.task-del svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
-
-/* ── Notes ── */
-.notes-layout{display:grid;grid-template-columns:240px 1fr;background:var(--surface);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;min-height:500px}
-.notes-list{border-right:0.5px solid var(--border);display:flex;flex-direction:column}
-.notes-list-head{padding:12px 14px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.notes-list-title{font-size:13px;font-weight:500}
+.ph{background:#FCEBEB;color:#A32D2D}.pm{background:var(--aml);color:#633806}.pl{background:#EAF3DE;color:#27500A}
+.tdel{background:none;border:none;cursor:pointer;color:var(--hint);opacity:0;transition:opacity .15s;display:flex;align-items:center}
+.trow:hover .tdel{opacity:1}
+/* Smart lists */
+.smart-tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.stab{padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:.5px solid var(--border);background:var(--surface);color:var(--muted);transition:all .15s}
+.stab:hover{background:var(--al);color:var(--accent)}
+.stab.on{background:var(--al);color:var(--accent);border-color:var(--am);font-weight:500}
+.stab.overdue{color:var(--red)}.stab.overdue.on{background:var(--rl);border-color:var(--red)}
+/* Subtasks */
+.subtask-list{padding-left:24px;margin-top:4px}
+.subtask-row{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px;color:var(--muted)}
+/* Pomodoro */
+.pomo-bar{background:var(--al);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
+.pomo-bar.on{display:flex;align-items:center;gap:16px}
+.pomo-time{font-size:28px;font-weight:500;color:var(--accent);font-variant-numeric:tabular-nums;min-width:72px}
+.pomo-task{flex:1;font-size:13px;color:var(--muted)}
+.pomo-btns{display:flex;gap:6px}
+.pbtn{font-size:12px;padding:6px 12px;border-radius:7px;cursor:pointer;border:.5px solid var(--am);background:var(--surface);color:var(--accent);font-family:inherit}
+.pbtn:hover{background:var(--accent);color:#fff}
+/* Notes */
+.notes-layout{display:grid;grid-template-columns:240px 1fr;background:var(--surface);border:.5px solid var(--border);border-radius:12px;overflow:hidden;min-height:520px}
+.nlist{border-right:.5px solid var(--border);display:flex;flex-direction:column}
+.nlhead{padding:12px 14px;border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.nlhead-title{font-size:13px;font-weight:500}
 .btn-new{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit}
-.note-search{padding:8px 14px;border-bottom:0.5px solid var(--border)}
-.note-search input{width:100%;font-size:12px;padding:6px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
-.notes-items{flex:1;overflow-y:auto}
-.note-li{padding:10px 14px;border-bottom:0.5px solid var(--border);cursor:pointer}
-.note-li:hover{background:var(--bg)}
-.note-li.on{background:var(--accent-light)}
-.note-li-title{font-size:13px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.note-li-prev{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.note-li-date{font-size:10px;color:var(--hint);margin-top:3px}
-.note-li-tags{display:flex;gap:3px;margin-top:4px;flex-wrap:wrap}
-.ntag{background:var(--accent-light);color:var(--accent);font-size:10px;padding:1px 6px;border-radius:10px}
-.note-editor{display:flex;flex-direction:column;padding:20px}
-.note-title-inp{font-size:19px;font-weight:500;border:none;outline:none;background:transparent;color:var(--text);width:100%;margin-bottom:8px;font-family:inherit}
-.note-tags-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.note-tag-inp{font-size:11px;border:0.5px dashed var(--border);border-radius:10px;padding:2px 8px;background:none;color:var(--muted);outline:none;font-family:inherit;width:80px}
-.toolbar{display:flex;gap:3px;margin-bottom:12px;padding-bottom:12px;border-bottom:0.5px solid var(--border);flex-wrap:wrap}
-.tb{background:none;border:0.5px solid var(--border);border-radius:5px;padding:4px 8px;cursor:pointer;font-size:12px;color:var(--muted);font-family:inherit}
+.nsearch{padding:8px 14px;border-bottom:.5px solid var(--border)}
+.nsearch input{width:100%;font-size:12px;padding:6px 10px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
+.nfolder{padding:6px 14px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--muted)}
+.nfolder:hover{background:var(--bg)}
+.nfolder.on{background:var(--al);color:var(--accent)}
+.nfolder-ico{font-size:14px}
+.nitems{flex:1;overflow-y:auto}
+.nli{padding:10px 14px;border-bottom:.5px solid var(--border);cursor:pointer}
+.nli:hover{background:var(--bg)}.nli.on{background:var(--al)}
+.nli-title{font-size:13px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nli-prev{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nli-date{font-size:10px;color:var(--hint);margin-top:3px}
+.ntag{background:var(--al);color:var(--accent);font-size:10px;padding:1px 6px;border-radius:10px}
+.neditor{display:flex;flex-direction:column;padding:20px}
+.ntitle{font-size:19px;font-weight:500;border:none;outline:none;background:transparent;color:var(--text);width:100%;margin-bottom:8px;font-family:inherit}
+.ntagrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.ntaginp{font-size:11px;border:.5px dashed var(--border);border-radius:10px;padding:2px 8px;background:none;color:var(--muted);outline:none;font-family:inherit;width:80px}
+.toolbar{display:flex;gap:3px;margin-bottom:12px;padding-bottom:12px;border-bottom:.5px solid var(--border);flex-wrap:wrap}
+.tb{background:none;border:.5px solid var(--border);border-radius:5px;padding:4px 8px;cursor:pointer;font-size:12px;color:var(--muted);font-family:inherit}
 .tb:hover{background:var(--bg);color:var(--text)}
-.note-body{flex:1;border:none;outline:none;background:transparent;color:var(--text);font-size:14px;line-height:1.8;resize:none;width:100%;min-height:300px;font-family:inherit}
-.note-save-row{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.nbody{flex:1;border:none;outline:none;background:transparent;color:var(--text);font-size:14px;line-height:1.8;resize:none;width:100%;min-height:280px;font-family:inherit}
+.nsave-row{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 .btn-save{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:inherit}
-.btn-del-note{background:none;border:0.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
-.note-empty{display:flex;align-items:center;justify-content:center;flex:1;color:var(--hint);font-size:13px}
-
-/* ── Nutrition ── */
+.btn-ghost{background:none;border:.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
+/* Nutrition */
 .macro-row{display:flex;gap:8px;margin-bottom:14px}
-.macro-box{flex:1;background:var(--bg);border-radius:8px;padding:10px;text-align:center}
-.macro-val{font-size:17px;font-weight:500}
-.macro-lbl{font-size:10px;color:var(--muted);margin-top:2px}
-.meal-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border)}
+.mbox{flex:1;background:var(--bg);border-radius:8px;padding:10px;text-align:center}
+.mval{font-size:17px;font-weight:500}.mlbl{font-size:10px;color:var(--muted);margin-top:2px}
+.meal-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:.5px solid var(--border)}
 .meal-row:last-child{border:none}
-.meal-name{flex:1;font-size:13px}
-.meal-kcal{font-size:12px;color:var(--muted)}
+.meal-name{flex:1;font-size:13px}.meal-k{font-size:12px;color:var(--muted)}
 .meal-del{background:none;border:none;cursor:pointer;color:var(--hint);opacity:0;transition:opacity .15s}
 .meal-row:hover .meal-del{opacity:1}
-.meal-del svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
-.kcal-progress{margin-bottom:14px}
-.kcal-bar-wrap{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:6px 0}
-.kcal-fill{height:8px;background:var(--green);border-radius:4px;transition:width .4s}
-.kcal-nums{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
-
-/* ── Workouts ── */
-.week-dots{display:flex;gap:8px;margin-bottom:16px;justify-content:space-between}
+.kbar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:6px 0}
+.kfill{height:8px;background:var(--green);border-radius:4px;transition:width .4s}
+.knums{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+/* Workouts */
+.wk-dots{display:flex;gap:6px;margin-bottom:16px;justify-content:space-between}
 .wd{display:flex;flex-direction:column;align-items:center;gap:4px}
-.wd-lbl{font-size:10px;color:var(--hint)}
-.wd-dot{width:30px;height:30px;border-radius:50%;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--hint);cursor:pointer;transition:background .15s}
-.wd-dot.done{background:var(--accent);border-color:var(--accent);color:#fff}
-.wd-dot.today{border:2px solid var(--accent);color:var(--accent);font-weight:500}
-.wd-dot svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5}
-.ex-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border)}
-.ex-row:last-child{border:none}
-.ex-name{flex:1;font-size:13px}
-.ex-sets{font-size:12px;color:var(--muted)}
-.ex-del{background:none;border:none;cursor:pointer;color:var(--hint);opacity:0}
-.ex-row:hover .ex-del{opacity:1}
-.ex-del svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
-
-/* ── Gallery ── */
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.gal-item{background:var(--surface);border:0.5px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer}
+.wdl{font-size:10px;color:var(--hint)}
+.wdd{width:30px;height:30px;border-radius:50%;border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--hint);cursor:pointer;transition:background .15s}
+.wdd.done{background:var(--accent);border-color:var(--accent);color:#fff}
+.wdd.today{border:2px solid var(--accent);color:var(--accent);font-weight:500}
+/* Exercise library */
+.ex-lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:16px}
+.ex-card{background:var(--surface);border:.5px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:border-color .15s}
+.ex-card:hover{border-color:var(--am)}
+.ex-name{font-size:13px;font-weight:500;margin-bottom:4px}
+.ex-muscle{font-size:11px;color:var(--muted)}
+.ex-tag{font-size:10px;padding:2px 6px;border-radius:10px;background:var(--al);color:var(--accent);display:inline-block;margin-top:4px}
+/* Body map */
+.body-map{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
+.body-svg{flex-shrink:0}
+.muscle-stats{flex:1}
+.mstat-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mstat-name{font-size:12px;min-width:100px}
+.mstat-bar{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.mstat-fill{height:6px;border-radius:3px;background:var(--accent)}
+.mstat-val{font-size:11px;color:var(--muted);min-width:30px;text-align:right}
+/* Rest timer */
+.rest-timer{background:var(--gl);border-radius:10px;padding:12px 16px;margin-bottom:12px;display:none;align-items:center;gap:12px}
+.rest-timer.on{display:flex}
+.rest-time{font-size:24px;font-weight:500;color:var(--green);font-variant-numeric:tabular-nums}
+/* Workout log */
+.wlog-set{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:.5px solid var(--border)}
+.wlog-set:last-child{border:none}
+.wlog-inp{width:60px;font-size:13px;padding:5px 8px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit;text-align:center}
+/* Calendar */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-nav{display:flex;gap:8px;align-items:center}
+.cal-nav-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:6px 12px;cursor:pointer;font-size:13px;font-family:inherit;color:var(--text)}
+.cal-nav-btn:hover{background:var(--bg)}
+.cal-view-tabs{display:flex;gap:4px}
+.cvtab{padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;border:.5px solid var(--border);background:var(--surface);color:var(--muted)}
+.cvtab.on{background:var(--al);color:var(--accent);border-color:var(--am)}
+.cal-week{display:grid;gap:0}
+.cal-day-col{border-right:.5px solid var(--border)}
+.cal-day-col:last-child{border:none}
+.cal-day-header{padding:10px;text-align:center;border-bottom:.5px solid var(--border);font-size:12px;font-weight:500}
+.cal-day-header.today{color:var(--accent)}
+.cal-day-date{font-size:20px;font-weight:500;display:block}
+.cal-day-name{font-size:11px;color:var(--muted)}
+.cal-slot{min-height:48px;padding:4px 6px;border-bottom:.5px solid var(--border);position:relative;cursor:pointer}
+.cal-slot:hover{background:var(--bg)}
+.cal-slot-time{font-size:10px;color:var(--hint)}
+.cal-event{background:var(--al);color:var(--accent);font-size:11px;padding:3px 7px;border-radius:5px;margin-top:2px;cursor:pointer;border-left:2px solid var(--accent)}
+.cal-event.task{background:#EAF3DE;color:#27500A;border-color:var(--green)}
+.cal-event.workout{background:var(--ol);color:#712B13;border-color:var(--orange)}
+/* Gallery */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.gal-item{background:var(--surface);border:.5px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer}
 .gal-thumb{aspect-ratio:1;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .gal-thumb img{width:100%;height:100%;object-fit:cover}
-.gal-thumb svg{width:28px;height:28px;stroke:var(--hint);fill:none;stroke-width:1.5}
 .gal-name{font-size:11px;color:var(--muted);padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gal-upload{border:1.5px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--hint);font-size:12px;cursor:pointer;padding:20px}
-.gal-upload:hover{border-color:var(--accent-mid);color:var(--accent)}
-
-/* ── Modal ── */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center}
+/* Global search */
+.gsearch-wrap{position:relative;margin-bottom:16px}
+.gsearch{width:100%;font-size:14px;padding:10px 16px 10px 40px;border:.5px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);outline:none;font-family:inherit}
+.gsearch:focus{border-color:var(--am)}
+.gsearch-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--hint)}
+.gres-item{padding:10px 0;border-bottom:.5px solid var(--border);cursor:pointer}
+.gres-item:hover{background:var(--bg);margin:0 -16px;padding:10px 16px}
+.gres-type{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.gres-title{font-size:13px;font-weight:500;margin:2px 0}
+.gres-prev{font-size:12px;color:var(--muted)}
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:200;align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
-.modal{background:var(--surface);border-radius:14px;padding:24px;width:420px;max-width:90vw}
+.modal{background:var(--surface);border-radius:14px;padding:24px;width:440px;max-width:90vw;max-height:90vh;overflow-y:auto}
 .modal h3{font-size:16px;font-weight:500;margin-bottom:16px}
-.form-row{margin-bottom:12px}
-.form-row label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
-.form-row input,.form-row select,.form-row textarea{width:100%;font-size:13px;padding:8px 10px;border:0.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
-.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--accent-mid)}
-.modal-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.frow{margin-bottom:12px}
+.frow label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+.frow input,.frow select,.frow textarea{width:100%;font-size:13px;padding:8px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit}
+.frow input:focus,.frow select:focus,.frow textarea:focus{border-color:var(--am)}
+.mbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
 .btn-primary{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:8px 18px;font-size:13px;cursor:pointer;font-family:inherit}
-.btn-secondary{background:none;border:0.5px solid var(--border);border-radius:7px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
-.ai-result{background:var(--green-light);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;color:#0F6E56;display:none}
-
-/* ── Mobile ── */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:0.5px solid var(--border);padding:6px 0 10px;z-index:100;justify-content:space-around}
-.mob-it{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 10px;color:var(--hint);font-size:10px}
+.btn-secondary{background:none;border:.5px solid var(--border);border-radius:7px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit}
+.ai-res{background:var(--gl);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;color:#0F6E56;display:none}
+/* Mobile nav */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:.5px solid var(--border);padding:6px 0 10px;z-index:100;justify-content:space-around}
+.mob-it{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 8px;color:var(--hint);font-size:10px}
 .mob-it.on{color:var(--accent)}
-.mob-it svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-
 .toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
-
-@media(max-width:680px){
-  .sidebar{display:none}
-  .main{margin-left:0;padding:16px 14px 80px}
-  .mob-nav{display:flex}
-  .two-col{grid-template-columns:1fr}
-  .notes-layout{grid-template-columns:1fr}
+.ico svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:700px){
+  .sidebar{display:none}.main{margin-left:0;padding:16px 14px 80px}
+  .mob-nav{display:flex}.two{grid-template-columns:1fr}
+  .notes-layout{grid-template-columns:1fr}.nlist{display:none}
   .metrics{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
-
 <!-- Sidebar -->
 <aside class="sidebar">
   <div class="logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
     Life OS
   </div>
-  <nav style="flex:1;padding:8px 0;overflow-y:auto">
+  <nav style="flex:1;padding:8px 0">
     <div class="nav-sec">Главное</div>
-    <div class="nav-item on" onclick="goPage('dashboard')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Дашборд
-    </div>
+    <div class="ni on" onclick="go('dashboard')"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Дашборд</div>
+    <div class="ni" onclick="go('search')"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Поиск</div>
     <div class="nav-sec">Знания</div>
-    <div class="nav-item" onclick="goPage('notes')">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      База знаний
-    </div>
+    <div class="ni" onclick="go('notes')"><span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>База знаний</div>
     <div class="nav-sec">Жизнь</div>
-    <div class="nav-item" onclick="goPage('tasks')">
-      <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      Задачи
-    </div>
-    <div class="nav-item" onclick="goPage('workouts')">
-      <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M5 12h14M3 10l2 2-2 2M21 10l-2 2 2 2"/></svg>
-      Тренировки
-    </div>
-    <div class="nav-item" onclick="goPage('nutrition')">
-      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
-      Питание
-    </div>
+    <div class="ni" onclick="go('tasks')"><span class="ico"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>Задачи</div>
+    <div class="ni" onclick="go('calendar')"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Календарь</div>
+    <div class="ni" onclick="go('workouts')"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M5 12h14M3 10l2 2-2 2M21 10l-2 2 2 2"/></svg></span>Тренировки</div>
+    <div class="ni" onclick="go('nutrition')"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg></span>Питание</div>
     <div class="nav-sec">Файлы</div>
-    <div class="nav-item" onclick="goPage('gallery')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      Галерея
-    </div>
+    <div class="ni" onclick="go('gallery')"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>Галерея</div>
   </nav>
 </aside>
 
-<!-- Mobile nav -->
 <nav class="mob-nav">
-  <div class="mob-it on" onclick="goPage('dashboard')">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    Главная
-  </div>
-  <div class="mob-it" onclick="goPage('notes')">
-    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-    Заметки
-  </div>
-  <div class="mob-it" onclick="goPage('tasks')">
-    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    Задачи
-  </div>
-  <div class="mob-it" onclick="goPage('workouts')">
-    <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M5 12h14M3 10l2 2-2 2M21 10l-2 2 2 2"/></svg>
-    Трен.
-  </div>
-  <div class="mob-it" onclick="goPage('nutrition')">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    Питание
-  </div>
+  <div class="mob-it on" onclick="go('dashboard')">🏠<span>Главная</span></div>
+  <div class="mob-it" onclick="go('notes')">📝<span>Заметки</span></div>
+  <div class="mob-it" onclick="go('tasks')">✅<span>Задачи</span></div>
+  <div class="mob-it" onclick="go('calendar')">📅<span>Кал.</span></div>
+  <div class="mob-it" onclick="go('workouts')">💪<span>Трен.</span></div>
 </nav>
 
-<!-- ═══════════ MAIN ═══════════ -->
 <main class="main">
 
-<!-- ── DASHBOARD ── -->
+<!-- DASHBOARD -->
 <div id="page-dashboard" class="page on">
-  <div class="page-title">Добрый день, Елена</div>
-  <div class="page-sub" id="dash-date"></div>
-
-  <div class="quick-bar">
-    <div class="quick-label">Быстрый ввод</div>
-    <div class="quick-row">
-      <input class="q-in" id="q-task" placeholder="Добавить задачу... (Enter)">
-      <select id="q-task-prio" style="font-size:12px;padding:8px 8px;border:0.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
-        <option value="medium">Средний</option>
-        <option value="high">Высокий</option>
-        <option value="low">Низкий</option>
+  <div class="ptitle" id="dash-greet">Добрый день, Елена</div>
+  <div class="psub" id="dash-date"></div>
+  <div class="qbar">
+    <div class="qlabel">Быстрый ввод</div>
+    <div class="qrow">
+      <input class="qin" id="q-task" placeholder="Добавить задачу... (Enter)">
+      <select id="q-prio" style="font-size:12px;padding:8px;border:.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="medium">Средний</option><option value="high">Высокий</option><option value="low">Низкий</option>
       </select>
-      <button class="q-btn" onclick="quickTask()">
-        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        Задача
-      </button>
+      <button class="qbtn" onclick="quickTask()">✓ Задача</button>
     </div>
-    <div class="quick-row">
-      <input class="q-in" id="q-note" placeholder="Быстрая заметка...">
-      <button class="q-btn" onclick="quickNote()">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        Заметка
-      </button>
-      <button class="q-btn green" onclick="openAiFood()">
-        <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        Фото еды → AI
-      </button>
+    <div class="qrow">
+      <input class="qin" id="q-note" placeholder="Быстрая заметка...">
+      <button class="qbtn" onclick="quickNote()">📝 Заметка</button>
+      <button class="qbtn green" onclick="openAiFood()">📷 Фото → AI</button>
+    </div>
+    <div class="qrow">
+      <input class="qin" id="q-event-title" placeholder="Событие в календарь...">
+      <input type="datetime-local" id="q-event-date" style="font-size:12px;padding:7px 8px;border:.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+      <button class="qbtn" onclick="quickEvent()">📅 Событие</button>
     </div>
   </div>
-
-  <div class="metrics" id="dash-metrics">
-    <div class="mc">
-      <div class="mc-lbl">Задачи сегодня</div>
-      <div class="mc-val" id="m-tasks">0/0</div>
-      <div class="mc-sub">выполнено</div>
-      <div class="mc-bar"><div class="mc-fill" id="m-tasks-bar" style="width:0%;background:var(--accent)"></div></div>
-    </div>
-    <div class="mc">
-      <div class="mc-lbl">Калории</div>
-      <div class="mc-val" id="m-kcal">0</div>
-      <div class="mc-sub" id="m-kcal-sub">цель: 1800 ккал</div>
-      <div class="mc-bar"><div class="mc-fill" id="m-kcal-bar" style="width:0%;background:var(--green)"></div></div>
-    </div>
-    <div class="mc">
-      <div class="mc-lbl">Тренировки</div>
-      <div class="mc-val" id="m-workouts">0</div>
-      <div class="mc-sub">на этой неделе</div>
-      <div class="mc-bar"><div class="mc-fill" id="m-workouts-bar" style="width:0%;background:var(--orange)"></div></div>
-    </div>
-    <div class="mc">
-      <div class="mc-lbl">Заметки</div>
-      <div class="mc-val" id="m-notes">0</div>
-      <div class="mc-sub">в базе знаний</div>
-      <div class="mc-bar"><div class="mc-fill" id="m-notes-bar" style="width:0%;background:var(--amber)"></div></div>
-    </div>
+  <div class="metrics">
+    <div class="mc"><div class="mc-l">Задачи</div><div class="mc-v" id="m-tasks">0/0</div><div class="mc-s">сегодня</div><div class="mc-bar"><div class="mc-fill" id="mb-tasks" style="width:0%;background:var(--accent)"></div></div></div>
+    <div class="mc"><div class="mc-l">Калории</div><div class="mc-v" id="m-kcal">0</div><div class="mc-s">цель 1800</div><div class="mc-bar"><div class="mc-fill" id="mb-kcal" style="width:0%;background:var(--green)"></div></div></div>
+    <div class="mc"><div class="mc-l">Тренировки</div><div class="mc-v" id="m-wo">0</div><div class="mc-s">эта неделя</div><div class="mc-bar"><div class="mc-fill" id="mb-wo" style="width:0%;background:var(--orange)"></div></div></div>
+    <div class="mc"><div class="mc-l">Заметки</div><div class="mc-v" id="m-notes">0</div><div class="mc-s">всего</div><div class="mc-bar"><div class="mc-fill" id="mb-notes" style="width:0%;background:var(--amber)"></div></div></div>
   </div>
-
-  <div class="two-col">
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">Задачи на сегодня</span>
-        <button class="card-action" onclick="goPage('tasks')">все задачи</button>
-      </div>
-      <div id="dash-tasks"><div style="color:var(--hint);font-size:13px;padding:8px 0">Загрузка...</div></div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">Последние заметки</span>
-        <button class="card-action" onclick="goPage('notes')">все заметки</button>
-      </div>
-      <div id="dash-notes"><div style="color:var(--hint);font-size:13px;padding:8px 0">Загрузка...</div></div>
-    </div>
+  <div class="two">
+    <div class="card"><div class="ch"><span class="ct">Задачи на сегодня</span><button class="ca" onclick="go('tasks')">все →</button></div><div id="d-tasks"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div></div>
+    <div class="card"><div class="ch"><span class="ct">Последние заметки</span><button class="ca" onclick="go('notes')">все →</button></div><div id="d-notes"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div></div>
   </div>
-
-  <div class="card">
-    <div class="card-head">
-      <span class="card-title">Питание сегодня</span>
-      <button class="card-action" onclick="goPage('nutrition')">подробнее</button>
+  <div class="two">
+    <div class="card"><div class="ch"><span class="ct">Питание сегодня</span><button class="ca" onclick="go('nutrition')">подробнее →</button></div>
+      <div class="knums"><span id="d-kcal">0 ккал</span><span>цель 1800</span></div>
+      <div class="kbar"><div class="kfill" id="d-kfill" style="width:0%"></div></div>
+      <div id="d-meals"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
     </div>
-    <div class="kcal-progress">
-      <div class="kcal-nums"><span id="d-kcal-now">0 ккал</span><span id="d-kcal-goal">цель: 1800</span></div>
-      <div class="kcal-bar-wrap"><div class="kcal-fill" id="d-kcal-fill" style="width:0%"></div></div>
-    </div>
-    <div id="dash-meals"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
+    <div class="card"><div class="ch"><span class="ct">Ближайшие события</span><button class="ca" onclick="go('calendar')">календарь →</button></div><div id="d-events"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div></div>
   </div>
 </div>
 
-<!-- ── NOTES ── -->
+<!-- SEARCH -->
+<div id="page-search" class="page">
+  <div class="ptitle">Поиск</div>
+  <div class="psub">Поиск по всей базе — заметкам, задачам, питанию, тренировкам</div>
+  <div class="gsearch-wrap">
+    <span class="gsearch-ico">🔍</span>
+    <input class="gsearch" id="gsearch-inp" placeholder="Начни вводить..." oninput="globalSearch()">
+  </div>
+  <div id="gsearch-res"></div>
+</div>
+
+<!-- NOTES -->
 <div id="page-notes" class="page">
   <div class="notes-layout">
-    <div class="notes-list">
-      <div class="notes-list-head">
-        <span class="notes-list-title">Заметки</span>
-        <button class="btn-new" onclick="newNote()">+ Новая</button>
-      </div>
-      <div class="note-search"><input placeholder="Поиск..." id="note-search" oninput="filterNotes()"></div>
-      <div class="notes-items" id="notes-list"></div>
+    <div class="nlist">
+      <div class="nlhead"><span class="nlhead-title">База знаний</span><button class="btn-new" onclick="newNote()">+ Новая</button></div>
+      <div class="nsearch"><input placeholder="Поиск заметок..." id="note-search" oninput="filterNotes()"></div>
+      <div id="folders-list"></div>
+      <div class="nitems" id="notes-list"></div>
     </div>
-    <div class="note-editor" id="note-editor">
-      <div class="note-empty">Выберите заметку или создайте новую</div>
-    </div>
+    <div class="neditor" id="note-editor"><div style="margin:auto;color:var(--hint);font-size:13px">Выберите заметку или создайте новую</div></div>
   </div>
 </div>
 
-<!-- ── TASKS ── -->
+<!-- TASKS -->
 <div id="page-tasks" class="page">
-  <div class="page-title">Задачи</div>
-  <div class="page-sub">Управляй задачами и отслеживай прогресс</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="card-title">Все задачи</span>
-      <button class="card-action" onclick="openTaskModal()">+ добавить</button>
+  <div class="ptitle">Задачи</div>
+  <div class="pomo-bar" id="pomo-bar">
+    <div>🍅</div>
+    <div class="pomo-time" id="pomo-time">25:00</div>
+    <div class="pomo-task" id="pomo-task-name">Фокус</div>
+    <div class="pomo-btns">
+      <button class="pbtn" id="pomo-toggle" onclick="togglePomo()">▶ Старт</button>
+      <button class="pbtn" onclick="stopPomo()">✕ Стоп</button>
     </div>
-    <div id="tasks-list"><div style="color:var(--hint);font-size:13px;padding:8px 0">Загрузка...</div></div>
+  </div>
+  <div class="smart-tabs" id="smart-tabs">
+    <div class="stab on" data-filter="today" onclick="setFilter('today')">Сегодня</div>
+    <div class="stab" data-filter="tomorrow" onclick="setFilter('tomorrow')">Завтра</div>
+    <div class="stab overdue" data-filter="overdue" onclick="setFilter('overdue')">Просроченные</div>
+    <div class="stab" data-filter="week" onclick="setFilter('week')">7 дней</div>
+    <div class="stab" data-filter="all" onclick="setFilter('all')">Все</div>
+    <div class="stab" data-filter="done" onclick="setFilter('done')">Выполненные</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct" id="tasks-title">Сегодня</span><button class="ca" onclick="openTaskModal()">+ добавить</button></div>
+    <div id="tasks-list"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
   </div>
 </div>
 
-<!-- ── WORKOUTS ── -->
-<div id="page-workouts" class="page">
-  <div class="page-title">Тренировки</div>
-  <div class="page-sub">История и план тренировок</div>
+<!-- CALENDAR -->
+<div id="page-calendar" class="page">
+  <div class="ptitle">Календарь</div>
   <div class="card">
-    <div class="card-head">
-      <span class="card-title">Неделя</span>
-      <button class="card-action" onclick="openWorkoutModal()">+ добавить</button>
-    </div>
-    <div class="week-dots" id="week-dots"></div>
-    <div id="workouts-list"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
-  </div>
-</div>
-
-<!-- ── NUTRITION ── -->
-<div id="page-nutrition" class="page">
-  <div class="page-title">Питание</div>
-  <div class="page-sub">Дневник питания и калорий</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="card-title">Сегодня</span>
-      <div style="display:flex;gap:8px">
-        <button class="card-action" onclick="openAiFood()">📷 Фото → AI</button>
-        <button class="card-action" onclick="openFoodModal()">+ добавить</button>
+    <div class="cal-header">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="calNav(-1)">←</button>
+        <span id="cal-period" style="font-size:14px;font-weight:500;min-width:160px;text-align:center"></span>
+        <button class="cal-nav-btn" onclick="calNav(1)">→</button>
+        <button class="cal-nav-btn" onclick="calToday()">Сегодня</button>
+      </div>
+      <div class="cal-view-tabs">
+        <div class="cvtab on" onclick="setCalView('week')">Неделя</div>
+        <div class="cvtab" onclick="setCalView('3day')">3 дня</div>
+        <div class="cvtab" onclick="setCalView('day')">День</div>
       </div>
     </div>
-    <div class="kcal-progress">
-      <div class="kcal-nums"><span id="kcal-now">0 ккал</span><span>цель: 1800</span></div>
-      <div class="kcal-bar-wrap"><div class="kcal-fill" id="kcal-fill" style="width:0%"></div></div>
+    <div id="cal-grid"></div>
+    <div style="margin-top:12px;display:flex;gap:12px;font-size:11px;color:var(--muted)">
+      <span><span style="display:inline-block;width:10px;height:10px;background:var(--al);border-left:2px solid var(--accent);margin-right:4px"></span>Событие</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:#EAF3DE;border-left:2px solid var(--green);margin-right:4px"></span>Задача</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:var(--ol);border-left:2px solid var(--orange);margin-right:4px"></span>Тренировка</span>
     </div>
-    <div class="macro-row">
-      <div class="macro-box"><div class="macro-val" id="mac-p">0г</div><div class="macro-lbl">Белки</div></div>
-      <div class="macro-box"><div class="macro-val" id="mac-c">0г</div><div class="macro-lbl">Углеводы</div></div>
-      <div class="macro-box"><div class="macro-val" id="mac-f">0г</div><div class="macro-lbl">Жиры</div></div>
+  </div>
+  <button class="btn-primary" onclick="openEventModal()" style="margin-top:8px">+ Добавить событие</button>
+</div>
+
+<!-- WORKOUTS -->
+<div id="page-workouts" class="page">
+  <div class="ptitle">Тренировки</div>
+  <div class="two">
+    <div class="card">
+      <div class="ch"><span class="ct">Неделя</span><button class="ca" onclick="openWorkoutModal()">+ тренировка</button></div>
+      <div class="wk-dots" id="week-dots"></div>
+      <div class="rest-timer" id="rest-timer">
+        <span>⏱</span>
+        <div class="rest-time" id="rest-time">60</div>
+        <div style="flex:1;font-size:13px;color:var(--green)">Отдых между подходами</div>
+        <button class="pbtn" onclick="stopRest()" style="background:var(--green);color:#fff;border-color:var(--green)">Готов</button>
+      </div>
+      <div id="workouts-list"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
     </div>
-    <div id="meals-list"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
+    <div class="card">
+      <div class="ch"><span class="ct">Нагрузка по мышцам</span></div>
+      <div class="body-map">
+        <svg class="body-svg" width="80" height="160" viewBox="0 0 80 160">
+          <ellipse cx="40" cy="16" rx="12" ry="14" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1"/>
+          <rect x="22" y="32" width="36" height="44" rx="6" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1" id="bm-chest"/>
+          <rect x="8" y="34" width="12" height="36" rx="4" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="1" id="bm-arms"/>
+          <rect x="60" y="34" width="12" height="36" rx="4" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="1"/>
+          <rect x="26" y="78" width="28" height="36" rx="4" fill="#FAEEDA" stroke="#FAC775" stroke-width="1" id="bm-core"/>
+          <rect x="22" y="116" width="15" height="40" rx="4" fill="#FAECE7" stroke="#F5C4B3" stroke-width="1" id="bm-legs"/>
+          <rect x="43" y="116" width="15" height="40" rx="4" fill="#FAECE7" stroke="#F5C4B3" stroke-width="1"/>
+        </svg>
+        <div class="muscle-stats" id="muscle-stats">
+          <div style="color:var(--hint);font-size:12px">Данные за последние 7 дней</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Библиотека упражнений</span></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <select id="ex-filter-muscle" onchange="filterExercises()" style="font-size:12px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Все мышцы</option>
+        <option value="Грудь">Грудь</option><option value="Спина">Спина</option>
+        <option value="Ноги">Ноги</option><option value="Плечи">Плечи</option>
+        <option value="Руки">Руки</option><option value="Пресс">Пресс</option>
+      </select>
+      <select id="ex-filter-equip" onchange="filterExercises()" style="font-size:12px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Любое оборудование</option>
+        <option value="Штанга">Штанга</option><option value="Гантели">Гантели</option>
+        <option value="Тренажёр">Тренажёр</option><option value="Без оборудования">Без оборудования</option>
+      </select>
+      <input id="ex-search" placeholder="Поиск упражнения..." oninput="filterExercises()" style="flex:1;font-size:12px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+    </div>
+    <div class="ex-lib" id="ex-lib"></div>
   </div>
 </div>
 
-<!-- ── GALLERY ── -->
-<div id="page-gallery" class="page">
-  <div class="page-title">Галерея</div>
-  <div class="page-sub">Файлы и изображения (ссылки с Яндекс Диска)</div>
+<!-- NUTRITION -->
+<div id="page-nutrition" class="page">
+  <div class="ptitle">Питание</div>
   <div class="card">
-    <div class="card-head">
-      <span class="card-title">Все файлы</span>
-      <button class="card-action" onclick="openFileModal()">+ добавить ссылку</button>
+    <div class="ch"><span class="ct">Сегодня</span>
+      <div style="display:flex;gap:8px">
+        <button class="ca" onclick="openAiFood()">📷 Фото → AI</button>
+        <button class="ca" onclick="openFoodModal()">+ добавить</button>
+      </div>
     </div>
-    <div class="gal-grid" id="gal-grid"><div style="color:var(--hint);font-size:13px">Загрузка...</div></div>
+    <div class="knums"><span id="kcal-now">0 ккал</span><span>цель: 1800</span></div>
+    <div class="kbar"><div class="kfill" id="kcal-fill" style="width:0%"></div></div>
+    <div class="macro-row">
+      <div class="mbox"><div class="mval" id="mac-p">0г</div><div class="mlbl">Белки</div></div>
+      <div class="mbox"><div class="mval" id="mac-c">0г</div><div class="mlbl">Углеводы</div></div>
+      <div class="mbox"><div class="mval" id="mac-f">0г</div><div class="mlbl">Жиры</div></div>
+    </div>
+    <div id="meals-list"></div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div id="page-gallery" class="page">
+  <div class="ptitle">Галерея</div>
+  <div class="psub">Файлы и фото (публичные ссылки с Яндекс Диска)</div>
+  <div class="card">
+    <div class="ch"><span class="ct">Все файлы</span><button class="ca" onclick="openFileModal()">+ добавить</button></div>
+    <div class="gal-grid" id="gal-grid"></div>
   </div>
 </div>
 
 </main>
 
-<!-- ═══ MODALS ═══ -->
-
-<!-- Task modal -->
+<!-- MODALS -->
 <div class="modal-bg" id="modal-task">
   <div class="modal">
     <h3>Новая задача</h3>
-    <div class="form-row"><label>Название</label><input id="t-title" placeholder="Что нужно сделать?"></div>
-    <div class="form-row"><label>Приоритет</label>
-      <select id="t-prio"><option value="medium">Средний</option><option value="high">Высокий</option><option value="low">Низкий</option></select>
-    </div>
-    <div class="form-row"><label>Дедлайн (необязательно)</label><input type="date" id="t-date"></div>
-    <div class="modal-btns">
-      <button class="btn-secondary" onclick="closeModal('modal-task')">Отмена</button>
-      <button class="btn-primary" onclick="saveTask()">Сохранить</button>
-    </div>
+    <div class="frow"><label>Название</label><input id="t-title" placeholder="Что нужно сделать?"></div>
+    <div class="frow"><label>Приоритет</label><select id="t-prio"><option value="medium">Средний</option><option value="high">Высокий</option><option value="low">Низкий</option></select></div>
+    <div class="frow"><label>Дата и время</label><input type="datetime-local" id="t-date"></div>
+    <div class="frow"><label>Подзадачи (каждая с новой строки)</label><textarea id="t-subs" rows="3" placeholder="Шаг 1&#10;Шаг 2"></textarea></div>
+    <div class="frow"><label>Теги (через запятую)</label><input id="t-tags" placeholder="работа, важно"></div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-task')">Отмена</button><button class="btn-primary" onclick="saveTask()">Сохранить</button></div>
   </div>
 </div>
 
-<!-- Food manual modal -->
 <div class="modal-bg" id="modal-food">
   <div class="modal">
     <h3>Добавить приём пищи</h3>
-    <div class="form-row"><label>Название</label><input id="f-name" placeholder="Например: овсянка с ягодами"></div>
-    <div class="form-row"><label>Калории (ккал)</label><input type="number" id="f-kcal" placeholder="0"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
-      <div class="form-row"><label>Белки (г)</label><input type="number" id="f-prot" placeholder="0"></div>
-      <div class="form-row"><label>Углеводы</label><input type="number" id="f-carb" placeholder="0"></div>
-      <div class="form-row"><label>Жиры</label><input type="number" id="f-fat" placeholder="0"></div>
+    <div class="frow"><label>Название</label><input id="f-name" placeholder="Например: овсянка с ягодами"></div>
+    <div class="frow"><label>Калории (ккал)</label><input type="number" id="f-kcal" placeholder="0"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div class="frow"><label>Белки (г)</label><input type="number" id="f-prot" placeholder="0"></div>
+      <div class="frow"><label>Углеводы</label><input type="number" id="f-carb" placeholder="0"></div>
+      <div class="frow"><label>Жиры</label><input type="number" id="f-fat" placeholder="0"></div>
     </div>
-    <div class="modal-btns">
-      <button class="btn-secondary" onclick="closeModal('modal-food')">Отмена</button>
-      <button class="btn-primary" onclick="saveFood()">Сохранить</button>
-    </div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-food')">Отмена</button><button class="btn-primary" onclick="saveFood()">Сохранить</button></div>
   </div>
 </div>
 
-<!-- AI Food modal -->
 <div class="modal-bg" id="modal-ai-food">
   <div class="modal">
-    <h3>Фото еды → AI распознавание</h3>
-    <div class="form-row"><label>Выберите фото блюда</label><input type="file" id="ai-photo" accept="image/*"></div>
-    <div class="ai-result" id="ai-result"></div>
-    <div class="modal-btns">
+    <h3>📷 Фото еды → AI распознавание</h3>
+    <div class="frow"><label>Выберите фото блюда</label><input type="file" id="ai-photo" accept="image/*"></div>
+    <div class="ai-res" id="ai-res"></div>
+    <div class="mbtns">
       <button class="btn-secondary" onclick="closeModal('modal-ai-food')">Отмена</button>
-      <button class="btn-primary" id="ai-analyze-btn" onclick="analyzeFood()">Анализировать</button>
+      <button class="btn-primary" id="ai-btn" onclick="analyzeFood()">Анализировать</button>
       <button class="btn-primary" id="ai-save-btn" style="display:none" onclick="saveAiFood()">Сохранить</button>
     </div>
   </div>
 </div>
 
-<!-- Workout modal -->
 <div class="modal-bg" id="modal-workout">
   <div class="modal">
     <h3>Добавить тренировку</h3>
-    <div class="form-row"><label>Название</label><input id="w-title" placeholder="Например: силовая A"></div>
-    <div class="form-row"><label>Дата</label><input type="date" id="w-date"></div>
-    <div class="form-row"><label>Длительность (мин)</label><input type="number" id="w-dur" placeholder="60"></div>
-    <div class="form-row"><label>Упражнения (каждое с новой строки: Приседания 4x12)</label>
-      <textarea id="w-exer" rows="4" placeholder="Приседания 4x12&#10;Жим гантелей 3x10&#10;Планка 3x60сек"></textarea>
-    </div>
-    <div class="modal-btns">
-      <button class="btn-secondary" onclick="closeModal('modal-workout')">Отмена</button>
-      <button class="btn-primary" onclick="saveWorkout()">Сохранить</button>
-    </div>
+    <div class="frow"><label>Название</label><input id="w-title" placeholder="Силовая A / Кардио / Йога"></div>
+    <div class="frow"><label>Дата</label><input type="date" id="w-date"></div>
+    <div class="frow"><label>Длительность (мин)</label><input type="number" id="w-dur" placeholder="60"></div>
+    <div class="frow"><label>Упражнения и подходы</label><textarea id="w-exer" rows="5" placeholder="Приседания 4x12 80кг&#10;Жим лёжа 3x10 60кг&#10;Планка 3x60сек"></textarea></div>
+    <div class="frow"><label>Заметки</label><textarea id="w-notes" rows="2" placeholder="Самочувствие, комментарии..."></textarea></div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-workout')">Отмена</button><button class="btn-primary" onclick="saveWorkout()">Сохранить</button></div>
   </div>
 </div>
 
-<!-- File modal -->
+<div class="modal-bg" id="modal-event">
+  <div class="modal">
+    <h3>Новое событие</h3>
+    <div class="frow"><label>Название</label><input id="ev-title" placeholder="Встреча, звонок, напоминание..."></div>
+    <div class="frow"><label>Дата и время</label><input type="datetime-local" id="ev-start"></div>
+    <div class="frow"><label>До (необязательно)</label><input type="datetime-local" id="ev-end"></div>
+    <div class="frow"><label>Цвет</label>
+      <select id="ev-color"><option value="purple">Фиолетовый</option><option value="green">Зелёный</option><option value="orange">Оранжевый</option><option value="blue">Синий</option></select>
+    </div>
+    <div class="frow"><label>Заметка</label><textarea id="ev-note" rows="2" placeholder="Детали..."></textarea></div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-event')">Отмена</button><button class="btn-primary" onclick="saveEvent()">Сохранить</button></div>
+  </div>
+</div>
+
 <div class="modal-bg" id="modal-file">
   <div class="modal">
-    <h3>Добавить файл с Яндекс Диска</h3>
-    <div class="form-row"><label>Название файла</label><input id="fi-name" placeholder="фото_тренировка.jpg"></div>
-    <div class="form-row"><label>Ссылка (Яндекс Диск — публичная ссылка)</label><input id="fi-url" placeholder="https://disk.yandex.ru/..."></div>
-    <div class="form-row"><label>Тип</label>
-      <select id="fi-type"><option value="image">Фото</option><option value="pdf">PDF</option><option value="doc">Документ</option><option value="video">Видео</option></select>
+    <h3>Добавить файл</h3>
+    <div class="frow"><label>Название</label><input id="fi-name" placeholder="фото.jpg"></div>
+    <div class="frow"><label>Ссылка (Яндекс Диск — публичная)</label><input id="fi-url" placeholder="https://disk.yandex.ru/..."></div>
+    <div class="frow"><label>Тип</label><select id="fi-type"><option value="image">Фото</option><option value="pdf">PDF</option><option value="doc">Документ</option></select></div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-file')">Отмена</button><button class="btn-primary" onclick="saveFile()">Сохранить</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-folder">
+  <div class="modal">
+    <h3>Новая папка</h3>
+    <div class="frow"><label>Название</label><input id="fold-name" placeholder="Проекты, Работа, Идеи..."></div>
+    <div class="frow"><label>Иконка</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="icon-picker">
+        <span class="icon-opt" data-ico="📁" onclick="pickIcon('📁')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">📁</span>
+        <span class="icon-opt" data-ico="💼" onclick="pickIcon('💼')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">💼</span>
+        <span class="icon-opt" data-ico="💡" onclick="pickIcon('💡')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">💡</span>
+        <span class="icon-opt" data-ico="🎯" onclick="pickIcon('🎯')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🎯</span>
+        <span class="icon-opt" data-ico="📚" onclick="pickIcon('📚')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">📚</span>
+        <span class="icon-opt" data-ico="🏠" onclick="pickIcon('🏠')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🏠</span>
+        <span class="icon-opt" data-ico="💪" onclick="pickIcon('💪')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">💪</span>
+        <span class="icon-opt" data-ico="🍎" onclick="pickIcon('🍎')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🍎</span>
+        <span class="icon-opt" data-ico="✨" onclick="pickIcon('✨')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">✨</span>
+        <span class="icon-opt" data-ico="🎨" onclick="pickIcon('🎨')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🎨</span>
+        <span class="icon-opt" data-ico="💰" onclick="pickIcon('💰')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">💰</span>
+        <span class="icon-opt" data-ico="🌿" onclick="pickIcon('🌿')" style="font-size:22px;cursor:pointer;padding:4px;border-radius:6px;border:2px solid transparent">🌿</span>
+      </div>
+      <input id="fold-ico" value="📁" style="margin-top:8px;font-size:13px;padding:6px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);outline:none;width:80px">
     </div>
-    <div class="modal-btns">
-      <button class="btn-secondary" onclick="closeModal('modal-file')">Отмена</button>
-      <button class="btn-primary" onclick="saveFile()">Сохранить</button>
-    </div>
+    <div class="mbtns"><button class="btn-secondary" onclick="closeModal('modal-folder')">Отмена</button><button class="btn-primary" onclick="saveFolder()">Создать</button></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const SB_URL = 'https://oizycaaxpmqekkcoujkg.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9penljYWF4cG1xZWtrY291amtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjE3NTcsImV4cCI6MjA5Nzc5Nzc1N30.U1vkgO5RK2xjCsxHgQgWQnH4HwMMdUglzSPgvINVMfw';
-const CLAUDE_KEY = 'YOUR_ANTHROPIC_API_KEY'; // замени перед деплоем
+const SB='https://oizycaaxpmqekkcoujkg.supabase.co';
+const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9penljYWF4cG1xZWtrY291amtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjE3NTcsImV4cCI6MjA5Nzc5Nzc1N30.U1vkgO5RK2xjCsxHgQgWQnH4HwMMdUglzSPgvINVMfw';
+const AK='YOUR_ANTHROPIC_KEY';
 
-async function sb(table, opts={}) {
-  const {method='GET', filter='', body=null, order='created_at.desc', limit=''} = opts;
-  let url = `${SB_URL}/rest/v1/${table}?${filter}${order?'&order='+order:''}${limit?'&limit='+limit:''}`;
-  const res = await fetch(url, {
-    method,
-    headers: {'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''},
-    body: body ? JSON.stringify(body) : null
-  });
-  if (!res.ok) { const e = await res.text(); throw new Error(e); }
-  if (method==='DELETE'||res.status===204) return null;
-  return res.json();
+async function sb(table,opts={}){
+  const{method='GET',filter='',body=null,order='created_at.desc',limit=''}=opts;
+  const url=`${SB}/rest/v1/${table}?${filter}${order?'&order='+order:''}${limit?'&limit='+limit:''}`;
+  const r=await fetch(url,{method,headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''},body:body?JSON.stringify(body):null});
+  if(!r.ok){const e=await r.text();throw new Error(e);}
+  if(method==='DELETE'||r.status===204)return null;
+  return r.json();
 }
 
-// ── State ──
-let notes=[], tasks=[], meals=[], workouts=[], files=[];
-let currentNote=null;
-let aiMealData=null;
+// State
+let notes=[],tasks=[],meals=[],workouts=[],files=[],events=[],folders=[];
+let currentNote=null,taskFilter='today',calView='week',calOffset=0;
+let pomoInterval=null,pomoSeconds=25*60,pomoRunning=false,pomoMode='work';
+let restInterval=null,restSeconds=60;
+let selectedFolder=null,selectedIcon='📁',aiMealData=null;
 
-// ── Toast ──
-function toast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
+// Toast
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-// ── Navigation ──
-function goPage(id) {
+// Navigation
+function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nav-item,.mob-it').forEach(n=>n.classList.remove('on'));
+  document.querySelectorAll('.ni,.mob-it').forEach(n=>n.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
-  document.querySelectorAll(`[onclick*="'${id}'"]`).forEach(n=>n.classList.add('on'));
-  if(id==='dashboard') loadDashboard();
-  if(id==='notes') loadNotes();
-  if(id==='tasks') loadTasks();
-  if(id==='workouts') loadWorkouts();
-  if(id==='nutrition') loadNutrition();
-  if(id==='gallery') loadGallery();
+  document.querySelectorAll(`[onclick*="go('${id}')"]`).forEach(n=>n.classList.add('on'));
+  if(id==='dashboard')loadDash();
+  if(id==='notes')loadNotes();
+  if(id==='tasks')loadTasks();
+  if(id==='calendar')loadCalendar();
+  if(id==='workouts')loadWorkouts();
+  if(id==='nutrition')loadNutrition();
+  if(id==='gallery')loadGallery();
 }
 
-// ── Modal ──
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+// Modals
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
-// ── Date ──
-function setDate(){
-  const d=new Date();
+// Date helpers
+const today=()=>new Date().toISOString().split('T')[0];
+const tomorrow=()=>{const d=new Date();d.setDate(d.getDate()+1);return d.toISOString().split('T')[0];};
+const in7=()=>{const d=new Date();d.setDate(d.getDate()+7);return d.toISOString().split('T')[0];};
+function fmtDate(iso){if(!iso)return'';const d=new Date(iso);return d.toLocaleDateString('ru',{day:'numeric',month:'short'});}
+function fmtDT(iso){if(!iso)return'';const d=new Date(iso);return d.toLocaleDateString('ru',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'});}
+
+// DASHBOARD
+async function loadDash(){
+  const h=new Date().getHours();
+  document.getElementById('dash-greet').textContent=(h<12?'Доброе утро':h<17?'Добрый день':'Добрый вечер')+', Елена';
   const days=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
   const months=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-  const el=document.getElementById('dash-date');
-  if(el) el.textContent=`${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  const h=d.getHours();
-  const greet=h<12?'Доброе утро':h<17?'Добрый день':'Добрый вечер';
-  document.querySelector('#page-dashboard .page-title').textContent=`${greet}, Елена`;
-}
-
-// ── DASHBOARD ──
-async function loadDashboard() {
-  setDate();
-  try {
-    const today=new Date().toISOString().split('T')[0];
-    [tasks,notes,meals,workouts]=await Promise.all([
-      sb('tasks',{order:'created_at.desc'}),
-      sb('notes',{order:'updated_at.desc',limit:'5'}),
-      sb('nutrition_log',{filter:`logged_at=gte.${today}T00:00:00&`,order:'logged_at.desc'}),
-      sb('workouts',{order:'worked_out_at.desc'})
-    ]);
-    renderDashMetrics();
-    renderDashTasks();
-    renderDashNotes();
-    renderDashMeals();
-  } catch(e){ console.error(e); }
-}
-
-function renderDashMetrics(){
-  const todayTasks=tasks.filter(t=>{
-    const d=new Date(t.created_at).toDateString();
-    return d===new Date().toDateString();
-  });
-  const done=todayTasks.filter(t=>t.done).length;
-  const total=todayTasks.length;
-  document.getElementById('m-tasks').textContent=`${done}/${total}`;
-  document.getElementById('m-tasks-bar').style.width=(total?Math.round(done/total*100):0)+'%';
-
-  const kcal=meals.reduce((s,m)=>s+m.calories,0);
-  document.getElementById('m-kcal').textContent=kcal;
-  document.getElementById('m-kcal-bar').style.width=Math.min(Math.round(kcal/1800*100),100)+'%';
-
-  const weekStart=new Date(); weekStart.setDate(weekStart.getDate()-weekStart.getDay()+1);
-  const wcount=workouts.filter(w=>new Date(w.worked_out_at)>=weekStart).length;
-  document.getElementById('m-workouts').textContent=wcount+'/5';
-  document.getElementById('m-workouts-bar').style.width=Math.min(Math.round(wcount/5*100),100)+'%';
-
-  document.getElementById('m-notes').textContent=notes.length;
-  document.getElementById('m-notes-bar').style.width=Math.min(Math.round(notes.length/50*100),100)+'%';
-}
-
-function renderDashTasks(){
-  const el=document.getElementById('dash-tasks');
-  const today=tasks.filter(t=>new Date(t.created_at).toDateString()===new Date().toDateString()).slice(0,5);
-  if(!today.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:8px 0">Нет задач на сегодня</div>';return;}
-  el.innerHTML=today.map(t=>`
-    <div class="task-row">
-      <div class="chk ${t.done?'done':''}" onclick="toggleTask('${t.id}',${!t.done})">
-        ${t.done?'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':''}
-      </div>
-      <div class="task-txt ${t.done?'done':''}">${t.title}</div>
-      <span class="prio p${t.priority==='high'?'h':t.priority==='low'?'l':'m'}">${t.priority==='high'?'высокий':t.priority==='low'?'низкий':'средний'}</span>
-    </div>`).join('');
-}
-
-function renderDashNotes(){
-  const el=document.getElementById('dash-notes');
-  if(!notes.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:8px 0">Нет заметок</div>';return;}
-  el.innerHTML=notes.slice(0,4).map(n=>`
-    <div style="padding:8px 0;border-bottom:0.5px solid var(--border);cursor:pointer" onclick="openNote('${n.id}')">
-      <div style="font-size:13px;font-weight:500;margin-bottom:2px">${n.title||'Без названия'}</div>
-      <div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${(n.content||'').slice(0,60)}</div>
-      ${n.tags&&n.tags.length?`<div style="display:flex;gap:4px;margin-top:4px">${n.tags.slice(0,3).map(t=>`<span class="ntag">${t}</span>`).join('')}</div>`:''}
-    </div>`).join('');
-}
-
-function renderDashMeals(){
-  const el=document.getElementById('dash-meals');
-  const kcal=meals.reduce((s,m)=>s+m.calories,0);
-  document.getElementById('d-kcal-now').textContent=kcal+' ккал';
-  document.getElementById('d-kcal-fill').style.width=Math.min(Math.round(kcal/1800*100),100)+'%';
-  if(!meals.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет записей питания</div>';return;}
-  el.innerHTML=meals.slice(0,4).map(m=>`
-    <div class="meal-row">
-      <span class="meal-name">${m.meal_name}</span>
-      <span class="meal-kcal">${m.calories} ккал</span>
-    </div>`).join('');
-}
-
-// ── TASKS ──
-async function loadTasks(){
+  const d=new Date();
+  document.getElementById('dash-date').textContent=`${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
   try{
-    tasks=await sb('tasks',{order:'created_at.desc'});
-    renderTasks();
+    [tasks,notes,meals,workouts,events]=await Promise.all([
+      sb('tasks',{order:'created_at.desc'}),
+      sb('notes',{order:'updated_at.desc'}),
+      sb('nutrition_log',{filter:`logged_at=gte.${today()}T00:00:00&`,order:'logged_at.asc'}),
+      sb('workouts',{order:'worked_out_at.desc'}),
+      sb('events',{order:'start_at.asc'})
+    ]);
+    renderDashMetrics();renderDashTasks();renderDashNotes();renderDashMeals();renderDashEvents();
   }catch(e){console.error(e);}
 }
-
-function renderTasks(){
-  const el=document.getElementById('tasks-list');
-  if(!tasks.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:8px 0">Нет задач. Добавьте первую!</div>';return;}
-  el.innerHTML=tasks.map(t=>`
-    <div class="task-row">
-      <div class="chk ${t.done?'done':''}" onclick="toggleTask('${t.id}',${!t.done})">
-        ${t.done?'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':''}
-      </div>
-      <div class="task-txt ${t.done?'done':''}">${t.title}</div>
-      ${t.due_date?`<span style="font-size:11px;color:var(--hint)">${t.due_date}</span>`:''}
-      <span class="prio p${t.priority==='high'?'h':t.priority==='low'?'l':'m'}">${t.priority==='high'?'высокий':t.priority==='low'?'низкий':'средний'}</span>
-      <button class="task-del" onclick="deleteTask('${t.id}')"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
-    </div>`).join('');
+function renderDashMetrics(){
+  const tod=tasks.filter(t=>t.due_date&&t.due_date.startsWith(today()));
+  const done=tod.filter(t=>t.done).length;
+  document.getElementById('m-tasks').textContent=`${done}/${tod.length}`;
+  document.getElementById('mb-tasks').style.width=(tod.length?Math.round(done/tod.length*100):0)+'%';
+  const kcal=meals.reduce((s,m)=>s+m.calories,0);
+  document.getElementById('m-kcal').textContent=kcal;
+  document.getElementById('mb-kcal').style.width=Math.min(Math.round(kcal/1800*100),100)+'%';
+  const ws=new Date();ws.setDate(ws.getDate()-ws.getDay()+1);
+  const wc=workouts.filter(w=>new Date(w.worked_out_at)>=ws).length;
+  document.getElementById('m-wo').textContent=wc+'/5';
+  document.getElementById('mb-wo').style.width=Math.min(Math.round(wc/5*100),100)+'%';
+  document.getElementById('m-notes').textContent=notes.length;
+  document.getElementById('mb-notes').style.width=Math.min(Math.round(notes.length/50*100),100)+'%';
+}
+function renderDashTasks(){
+  const el=document.getElementById('d-tasks');
+  const tod=tasks.filter(t=>t.due_date&&t.due_date.startsWith(today())).slice(0,5);
+  if(!tod.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет задач на сегодня</div>';return;}
+  el.innerHTML=tod.map(t=>`<div class="trow"><div class="chk ${t.done?'done':''}" onclick="toggleTask('${t.id}',${!t.done})">
+    ${t.done?'✓':''}</div><div class="ttxt ${t.done?'done':''}">${t.title}</div>
+    <span class="prio p${t.priority[0]}">${t.priority==='high'?'!':t.priority==='low'?'↓':'·'}</span></div>`).join('');
+}
+function renderDashNotes(){
+  const el=document.getElementById('d-notes');
+  if(!notes.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет заметок</div>';return;}
+  el.innerHTML=notes.slice(0,4).map(n=>`<div style="padding:7px 0;border-bottom:.5px solid var(--border);cursor:pointer" onclick="go('notes')">
+    <div style="font-size:13px;font-weight:500">${n.title||'Без названия'}</div>
+    <div style="font-size:12px;color:var(--muted)">${(n.content||'').slice(0,50)}</div></div>`).join('');
+}
+function renderDashMeals(){
+  const kcal=meals.reduce((s,m)=>s+m.calories,0);
+  document.getElementById('d-kcal').textContent=kcal+' ккал';
+  document.getElementById('d-kfill').style.width=Math.min(Math.round(kcal/1800*100),100)+'%';
+  const el=document.getElementById('d-meals');
+  if(!meals.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет записей</div>';return;}
+  el.innerHTML=meals.slice(0,3).map(m=>`<div class="meal-row"><span class="meal-name">${m.meal_name}</span><span class="meal-k">${m.calories} ккал</span></div>`).join('');
+}
+function renderDashEvents(){
+  const el=document.getElementById('d-events');
+  const upcoming=events.filter(e=>new Date(e.start_at)>=new Date()).slice(0,4);
+  if(!upcoming.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет предстоящих событий</div>';return;}
+  el.innerHTML=upcoming.map(e=>`<div style="padding:7px 0;border-bottom:.5px solid var(--border)">
+    <div style="font-size:13px;font-weight:500">${e.title}</div>
+    <div style="font-size:11px;color:var(--muted)">${fmtDT(e.start_at)}</div></div>`).join('');
 }
 
-function openTaskModal(){
-  document.getElementById('t-title').value='';
-  document.getElementById('t-prio').value='medium';
-  document.getElementById('t-date').value='';
-  openModal('modal-task');
-}
-
-async function saveTask(){
-  const title=document.getElementById('t-title').value.trim();
-  if(!title){toast('Введите название задачи');return;}
-  try{
-    const r=await sb('tasks',{method:'POST',body:{title,priority:document.getElementById('t-prio').value,due_date:document.getElementById('t-date').value||null},order:''});
-    tasks.unshift(r[0]||{id:Date.now(),title,priority:'medium',done:false,created_at:new Date().toISOString()});
-    closeModal('modal-task');
-    renderTasks();
-    toast('Задача добавлена');
-  }catch(e){toast('Ошибка: '+e.message);}
-}
-
+// Quick actions
 async function quickTask(){
   const title=document.getElementById('q-task').value.trim();
-  const priority=document.getElementById('q-task-prio').value;
+  const priority=document.getElementById('q-prio').value;
   if(!title)return;
+  const now=new Date().toISOString();
   try{
-    const r=await sb('tasks',{method:'POST',body:{title,priority},order:''});
-    tasks.unshift(r[0]||{id:Date.now(),title,priority,done:false,created_at:new Date().toISOString()});
-    document.getElementById('q-task').value='';
-    renderDashTasks();
-    renderDashMetrics();
-    toast('Задача добавлена');
+    const r=await sb('tasks',{method:'POST',body:{title,priority,due_date:today()+'T00:00:00'},order:''});
+    tasks.unshift(r[0]);document.getElementById('q-task').value='';
+    renderDashTasks();renderDashMetrics();toast('Задача добавлена');
   }catch(e){toast('Ошибка: '+e.message);}
 }
 document.getElementById('q-task').addEventListener('keydown',e=>{if(e.key==='Enter')quickTask();});
-
-async function toggleTask(id,done){
-  try{
-    await sb('tasks',{method:'PATCH',filter:`id=eq.${id}&`,body:{done},order:''});
-    tasks=tasks.map(t=>t.id==id?{...t,done}:t);
-    renderTasks(); renderDashTasks(); renderDashMetrics();
-  }catch(e){toast('Ошибка');}
-}
-
-async function deleteTask(id){
-  if(!confirm('Удалить задачу?'))return;
-  try{
-    await sb('tasks',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
-    tasks=tasks.filter(t=>t.id!=id);
-    renderTasks(); renderDashTasks(); renderDashMetrics();
-    toast('Удалено');
-  }catch(e){toast('Ошибка');}
-}
-
-// ── NOTES ──
-async function loadNotes(){
-  try{
-    notes=await sb('notes',{order:'updated_at.desc'});
-    renderNotesList();
-    if(notes.length&&!currentNote) openNote(notes[0].id);
-  }catch(e){console.error(e);}
-}
-
-function renderNotesList(){
-  const q=(document.getElementById('note-search').value||'').toLowerCase();
-  const filtered=notes.filter(n=>(n.title+n.content).toLowerCase().includes(q));
-  const el=document.getElementById('notes-list');
-  if(!filtered.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:14px">Нет заметок</div>';return;}
-  el.innerHTML=filtered.map(n=>`
-    <div class="note-li ${currentNote&&currentNote.id===n.id?'on':''}" onclick="openNote('${n.id}')">
-      <div class="note-li-title">${n.title||'Без названия'}</div>
-      <div class="note-li-prev">${(n.content||'').slice(0,50)}</div>
-      ${n.tags&&n.tags.length?`<div class="note-li-tags">${n.tags.map(t=>`<span class="ntag">${t}</span>`).join('')}</div>`:''}
-      <div class="note-li-date">${new Date(n.updated_at).toLocaleDateString('ru')}</div>
-    </div>`).join('');
-}
-
-function filterNotes(){renderNotesList();}
-
-function openNote(id){
-  currentNote=notes.find(n=>n.id===id);
-  if(!currentNote)return;
-  renderNotesList();
-  const ed=document.getElementById('note-editor');
-  const tags=currentNote.tags||[];
-  ed.innerHTML=`
-    <input class="note-title-inp" id="n-title" placeholder="Заголовок" value="${(currentNote.title||'').replace(/"/g,'&quot;')}">
-    <div class="note-tags-row" id="n-tags-row">
-      ${tags.map(t=>`<span class="ntag" onclick="removeTag('${t}')">${t} ×</span>`).join('')}
-      <input class="note-tag-inp" id="n-tag-inp" placeholder="+ тег" onkeydown="addTag(event)">
-    </div>
-    <div class="toolbar">
-      <button class="tb" onclick="fmtBold()"><b>Ж</b></button>
-      <button class="tb" onclick="fmtItalic()"><i>К</i></button>
-      <button class="tb" onclick="fmtH1()">Н1</button>
-      <button class="tb" onclick="fmtH2()">Н2</button>
-      <button class="tb" onclick="fmtList()">Список</button>
-      <button class="tb" onclick="fmtLine()">———</button>
-    </div>
-    <textarea class="note-body" id="n-body" placeholder="Начни писать... Для связи с другой заметкой напиши [[название]]">${currentNote.content||''}</textarea>
-    <div class="note-save-row">
-      <button class="btn-del-note" onclick="deleteNote('${currentNote.id}')">Удалить</button>
-      <button class="btn-save" onclick="saveNote()">Сохранить</button>
-    </div>`;
-}
-
-function newNote(){
-  currentNote={id:null,title:'',content:'',tags:[],created_at:new Date().toISOString(),updated_at:new Date().toISOString()};
-  const ed=document.getElementById('note-editor');
-  ed.innerHTML=`
-    <input class="note-title-inp" id="n-title" placeholder="Заголовок">
-    <div class="note-tags-row" id="n-tags-row">
-      <input class="note-tag-inp" id="n-tag-inp" placeholder="+ тег" onkeydown="addTag(event)">
-    </div>
-    <div class="toolbar">
-      <button class="tb" onclick="fmtBold()"><b>Ж</b></button>
-      <button class="tb" onclick="fmtItalic()"><i>К</i></button>
-      <button class="tb" onclick="fmtH1()">Н1</button>
-      <button class="tb" onclick="fmtH2()">Н2</button>
-      <button class="tb" onclick="fmtList()">Список</button>
-      <button class="tb" onclick="fmtLine()">———</button>
-    </div>
-    <textarea class="note-body" id="n-body" placeholder="Начни писать..."></textarea>
-    <div class="note-save-row">
-      <button class="btn-save" onclick="saveNote()">Сохранить</button>
-    </div>`;
-  document.getElementById('n-title').focus();
-}
-
-function addTag(e){
-  if(e.key!=='Enter')return;
-  const val=e.target.value.trim();
-  if(!val)return;
-  if(!currentNote.tags)currentNote.tags=[];
-  if(!currentNote.tags.includes(val)){currentNote.tags.push(val);}
-  e.target.value='';
-  const row=document.getElementById('n-tags-row');
-  const inp=row.querySelector('.note-tag-inp');
-  row.innerHTML=currentNote.tags.map(t=>`<span class="ntag" onclick="removeTag('${t}')">${t} ×</span>`).join('');
-  row.appendChild(inp);
-}
-
-function removeTag(t){
-  currentNote.tags=currentNote.tags.filter(x=>x!==t);
-  const row=document.getElementById('n-tags-row');
-  const inp=row.querySelector('.note-tag-inp');
-  row.innerHTML=currentNote.tags.map(x=>`<span class="ntag" onclick="removeTag('${x}')">${x} ×</span>`).join('');
-  row.appendChild(inp);
-}
-
-function fmtBold(){insertAtCursor('**','**');}
-function fmtItalic(){insertAtCursor('_','_');}
-function fmtH1(){insertAtCursor('\n# ','');}
-function fmtH2(){insertAtCursor('\n## ','');}
-function fmtList(){insertAtCursor('\n- ','');}
-function fmtLine(){insertAtCursor('\n---\n','');}
-
-function insertAtCursor(before,after){
-  const ta=document.getElementById('n-body');
-  if(!ta)return;
-  const s=ta.selectionStart,e=ta.selectionEnd;
-  const sel=ta.value.substring(s,e);
-  ta.value=ta.value.substring(0,s)+before+sel+after+ta.value.substring(e);
-  ta.selectionStart=ta.selectionEnd=s+before.length+sel.length;
-  ta.focus();
-}
-
-async function saveNote(){
-  const title=document.getElementById('n-title').value;
-  const content=document.getElementById('n-body').value;
-  const tags=currentNote.tags||[];
-  const links=extractLinks(content);
-  const now=new Date().toISOString();
-  try{
-    if(currentNote.id){
-      await sb('notes',{method:'PATCH',filter:`id=eq.${currentNote.id}&`,body:{title,content,tags,links,updated_at:now},order:''});
-      notes=notes.map(n=>n.id===currentNote.id?{...n,title,content,tags,links,updated_at:now}:n);
-      currentNote={...currentNote,title,content,tags,links,updated_at:now};
-    } else {
-      const r=await sb('notes',{method:'POST',body:{title,content,tags,links},order:''});
-      const newN=r[0];
-      notes.unshift(newN);
-      currentNote=newN;
-    }
-    renderNotesList();
-    toast('Заметка сохранена');
-  }catch(e){toast('Ошибка: '+e.message);}
-}
 
 async function quickNote(){
   const content=document.getElementById('q-note').value.trim();
   if(!content)return;
   try{
     const r=await sb('notes',{method:'POST',body:{title:'Быстрая заметка',content},order:''});
-    notes.unshift(r[0]);
-    document.getElementById('q-note').value='';
-    renderDashNotes();
-    toast('Заметка сохранена');
+    notes.unshift(r[0]);document.getElementById('q-note').value='';
+    renderDashNotes();renderDashMetrics();toast('Заметка сохранена');
   }catch(e){toast('Ошибка: '+e.message);}
 }
 
-async function deleteNote(id){
-  if(!confirm('Удалить заметку?'))return;
+async function quickEvent(){
+  const title=document.getElementById('q-event-title').value.trim();
+  const dt=document.getElementById('q-event-date').value;
+  if(!title||!dt){toast('Введите название и дату');return;}
   try{
-    await sb('notes',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
-    notes=notes.filter(n=>n.id!==id);
-    currentNote=null;
-    renderNotesList();
-    document.getElementById('note-editor').innerHTML='<div class="note-empty">Выберите заметку или создайте новую</div>';
-    toast('Удалено');
+    const r=await sb('events',{method:'POST',body:{title,start_at:new Date(dt).toISOString(),color:'purple'},order:''});
+    events.push(r[0]);document.getElementById('q-event-title').value='';document.getElementById('q-event-date').value='';
+    renderDashEvents();toast('Событие добавлено');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
+
+// TASKS
+async function loadTasks(){
+  try{tasks=await sb('tasks',{order:'due_date.asc'});renderTasks();}catch(e){console.error(e);}
+}
+function setFilter(f){
+  taskFilter=f;
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+  document.querySelector(`[data-filter="${f}"]`).classList.add('on');
+  const labels={today:'Сегодня',tomorrow:'Завтра',overdue:'Просроченные',week:'Следующие 7 дней',all:'Все задачи',done:'Выполненные'};
+  document.getElementById('tasks-title').textContent=labels[f];
+  renderTasks();
+}
+function filterTaskList(){
+  const now=today();const tom=tomorrow();const w=in7();
+  if(taskFilter==='today')return tasks.filter(t=>!t.done&&t.due_date&&t.due_date.startsWith(now));
+  if(taskFilter==='tomorrow')return tasks.filter(t=>!t.done&&t.due_date&&t.due_date.startsWith(tom));
+  if(taskFilter==='overdue')return tasks.filter(t=>!t.done&&t.due_date&&t.due_date<now+'T');
+  if(taskFilter==='week')return tasks.filter(t=>!t.done&&t.due_date&&t.due_date>=now&&t.due_date<=w+'T23:59');
+  if(taskFilter==='done')return tasks.filter(t=>t.done);
+  return tasks.filter(t=>!t.done);
+}
+function renderTasks(){
+  const el=document.getElementById('tasks-list');
+  const list=filterTaskList();
+  if(!list.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:8px 0">Нет задач в этой категории</div>';return;}
+  el.innerHTML=list.map(t=>`
+    <div class="trow">
+      <div class="chk ${t.done?'done':''}" onclick="toggleTask('${t.id}',${!t.done})">${t.done?'✓':''}</div>
+      <div style="flex:1">
+        <div class="ttxt ${t.done?'done':''}">${t.title}</div>
+        ${t.subtasks&&t.subtasks.length?`<div class="subtask-list">${t.subtasks.map(s=>`<div class="subtask-row">• ${s}</div>`).join('')}</div>`:''}
+        ${t.due_date?`<div style="font-size:11px;color:var(--hint);margin-top:2px">📅 ${fmtDT(t.due_date)}</div>`:''}
+        ${t.tags&&t.tags.length?`<div style="display:flex;gap:4px;margin-top:3px">${t.tags.map(g=>`<span class="ntag">${g}</span>`).join('')}</div>`:''}
+      </div>
+      <span class="prio p${t.priority==='high'?'h':t.priority==='low'?'l':'m'}">${t.priority==='high'?'высокий':t.priority==='low'?'низкий':'средний'}</span>
+      <button title="Помодоро" onclick="startPomo('${t.id}','${t.title.replace(/'/g,"\\'")}',false)" style="background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px">🍅</button>
+      <button title="Секундомер" onclick="startPomo('${t.id}','${t.title.replace(/'/g,"\\'")}',true)" style="background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px">⏱</button>
+      <button class="tdel" onclick="deleteTask('${t.id}')">✕</button>
+    </div>`).join('');
+}
+function openTaskModal(){
+  document.getElementById('t-title').value='';
+  document.getElementById('t-date').value='';
+  document.getElementById('t-subs').value='';
+  document.getElementById('t-tags').value='';
+  document.getElementById('t-prio').value='medium';
+  openModal('modal-task');
+}
+async function saveTask(){
+  const title=document.getElementById('t-title').value.trim();
+  if(!title){toast('Введите название');return;}
+  const subs=document.getElementById('t-subs').value.split('\n').filter(s=>s.trim());
+  const tags=document.getElementById('t-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const due=document.getElementById('t-date').value;
+  try{
+    const r=await sb('tasks',{method:'POST',body:{title,priority:document.getElementById('t-prio').value,due_date:due?new Date(due).toISOString():null,subtasks:subs,tags},order:''});
+    tasks.unshift(r[0]);closeModal('modal-task');renderTasks();renderDashTasks();toast('Задача добавлена');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
+async function toggleTask(id,done){
+  try{
+    await sb('tasks',{method:'PATCH',filter:`id=eq.${id}&`,body:{done},order:''});
+    tasks=tasks.map(t=>t.id==id?{...t,done}:t);
+    renderTasks();renderDashTasks();renderDashMetrics();
+  }catch(e){toast('Ошибка');}
+}
+async function deleteTask(id){
+  if(!confirm('Удалить?'))return;
+  try{
+    await sb('tasks',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
+    tasks=tasks.filter(t=>t.id!=id);renderTasks();renderDashTasks();renderDashMetrics();toast('Удалено');
   }catch(e){toast('Ошибка');}
 }
 
-function extractLinks(text){
-  const m=text.match(/\[\[([^\]]+)\]\]/g)||[];
-  return m.map(x=>x.slice(2,-2));
+// Pomodoro
+function startPomo(id,name,stopwatch){
+  document.getElementById('pomo-bar').classList.add('on');
+  document.getElementById('pomo-task-name').textContent=name;
+  pomoSeconds=stopwatch?0:25*60;pomoRunning=true;pomoMode=stopwatch?'stop':'work';
+  document.getElementById('pomo-toggle').textContent='⏸ Пауза';
+  clearInterval(pomoInterval);
+  pomoInterval=setInterval(()=>{
+    if(pomoMode==='stop')pomoSeconds++;else pomoSeconds--;
+    updatePomoDisplay();
+    if(pomoMode!=='stop'&&pomoSeconds<=0){clearInterval(pomoInterval);toast('🍅 Время вышло! Отдохни 5 минут');}
+  },1000);
+  updatePomoDisplay();
 }
-
-function openNote(id){
-  goPage('notes');
-  setTimeout(()=>{
-    currentNote=notes.find(n=>n.id===id);
-    if(!currentNote)return;
-    renderNotesList();
-    const ed=document.getElementById('note-editor');
-    const tags=currentNote.tags||[];
-    ed.innerHTML=`
-      <input class="note-title-inp" id="n-title" placeholder="Заголовок" value="${(currentNote.title||'').replace(/"/g,'&quot;')}">
-      <div class="note-tags-row" id="n-tags-row">
-        ${tags.map(t=>`<span class="ntag" onclick="removeTag('${t}')">${t} ×</span>`).join('')}
-        <input class="note-tag-inp" id="n-tag-inp" placeholder="+ тег" onkeydown="addTag(event)">
-      </div>
-      <div class="toolbar">
-        <button class="tb" onclick="fmtBold()"><b>Ж</b></button>
-        <button class="tb" onclick="fmtItalic()"><i>К</i></button>
-        <button class="tb" onclick="fmtH1()">Н1</button>
-        <button class="tb" onclick="fmtH2()">Н2</button>
-        <button class="tb" onclick="fmtList()">Список</button>
-        <button class="tb" onclick="fmtLine()">———</button>
-      </div>
-      <textarea class="note-body" id="n-body" placeholder="Начни писать...">${currentNote.content||''}</textarea>
-      <div class="note-save-row">
-        <button class="btn-del-note" onclick="deleteNote('${currentNote.id}')">Удалить</button>
-        <button class="btn-save" onclick="saveNote()">Сохранить</button>
-      </div>`;
-  },50);
+function updatePomoDisplay(){
+  const m=Math.floor(Math.abs(pomoSeconds)/60).toString().padStart(2,'0');
+  const s=(Math.abs(pomoSeconds)%60).toString().padStart(2,'0');
+  document.getElementById('pomo-time').textContent=m+':'+s;
 }
+function togglePomo(){
+  pomoRunning=!pomoRunning;
+  if(pomoRunning){pomoInterval=setInterval(()=>{if(pomoMode==='stop')pomoSeconds++;else pomoSeconds--;updatePomoDisplay();},1000);document.getElementById('pomo-toggle').textContent='⏸ Пауза';}
+  else{clearInterval(pomoInterval);document.getElementById('pomo-toggle').textContent='▶ Старт';}
+}
+function stopPomo(){clearInterval(pomoInterval);document.getElementById('pomo-bar').classList.remove('on');pomoRunning=false;}
 
-// ── NUTRITION ──
-async function loadNutrition(){
-  const today=new Date().toISOString().split('T')[0];
+// NOTES
+async function loadNotes(){
   try{
-    meals=await sb('nutrition_log',{filter:`logged_at=gte.${today}T00:00:00&`,order:'logged_at.asc'});
-    renderNutrition();
+    [notes,folders]=await Promise.all([sb('notes',{order:'updated_at.desc'}),sb('note_folders',{order:'name.asc'}).catch(()=>[])]);
+    renderFolders();renderNotesList();
   }catch(e){console.error(e);}
 }
+function renderFolders(){
+  const el=document.getElementById('folders-list');
+  el.innerHTML=`<div class="nfolder ${!selectedFolder?'on':''}" onclick="selectFolder(null)"><span class="nfolder-ico">📋</span> Все заметки <span style="margin-left:auto;font-size:11px;color:var(--hint)">${notes.length}</span></div>`
+  +(folders||[]).map(f=>`<div class="nfolder ${selectedFolder===f.id?'on':''}" onclick="selectFolder('${f.id}')"><span class="nfolder-ico">${f.icon||'📁'}</span> ${f.name} <span style="margin-left:auto;font-size:11px;color:var(--hint)">${notes.filter(n=>n.folder_id===f.id).length}</span></div>`).join('')
+  +`<div class="nfolder" onclick="openFolderModal()" style="color:var(--hint)">+ Новая папка</div>`;
+}
+function selectFolder(id){selectedFolder=id;renderFolders();renderNotesList();}
+function filterNotes(){renderNotesList();}
+function renderNotesList(){
+  const q=(document.getElementById('note-search').value||'').toLowerCase();
+  let list=notes.filter(n=>(n.title+n.content).toLowerCase().includes(q));
+  if(selectedFolder)list=list.filter(n=>n.folder_id===selectedFolder);
+  const el=document.getElementById('notes-list');
+  if(!list.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:14px">Нет заметок</div>';return;}
+  el.innerHTML=list.map(n=>`<div class="nli ${currentNote&&currentNote.id===n.id?'on':''}" onclick="openNoteEditor('${n.id}')">
+    <div class="nli-title">${n.title||'Без названия'}</div>
+    <div class="nli-prev">${(n.content||'').slice(0,50)}</div>
+    ${n.tags&&n.tags.length?`<div style="display:flex;gap:3px;margin-top:3px">${n.tags.slice(0,3).map(t=>`<span class="ntag">${t}</span>`).join('')}</div>`:''}
+    <div class="nli-date">${new Date(n.updated_at).toLocaleDateString('ru')}</div></div>`).join('');
+}
+function openNoteEditor(id){
+  currentNote=notes.find(n=>n.id===id);if(!currentNote)return;
+  renderNotesList();
+  const ed=document.getElementById('note-editor');
+  const tags=currentNote.tags||[];
+  const folderOpts=(folders||[]).map(f=>`<option value="${f.id}" ${currentNote.folder_id===f.id?'selected':''}>${f.icon||'📁'} ${f.name}</option>`).join('');
+  ed.innerHTML=`
+    <input class="ntitle" id="n-title" placeholder="Заголовок" value="${(currentNote.title||'').replace(/"/g,'&quot;')}">
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <select id="n-folder" style="font-size:12px;padding:5px 8px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Без папки</option>${folderOpts}
+      </select>
+    </div>
+    <div class="ntagrow" id="ntagrow">${tags.map(t=>`<span class="ntag" onclick="removeNTag('${t}')">${t} ×</span>`).join('')}<input class="ntaginp" id="ntaginp" placeholder="+ тег" onkeydown="addNTag(event)"></div>
+    <div class="toolbar">
+      <button class="tb" onclick="fmt('**','**')"><b>Ж</b></button>
+      <button class="tb" onclick="fmt('_','_')"><i>К</i></button>
+      <button class="tb" onclick="fmt('\\n# ','')">Н1</button>
+      <button class="tb" onclick="fmt('\\n## ','')">Н2</button>
+      <button class="tb" onclick="fmt('\\n- ','')">Список</button>
+      <button class="tb" onclick="fmt('\\n---\\n','')">———</button>
+      <button class="tb" onclick="fmt('[[',']]')">[[Связь]]</button>
+    </div>
+    <textarea class="nbody" id="nbody">${currentNote.content||''}</textarea>
+    <div class="nsave-row">
+      <button class="btn-ghost" onclick="deleteNote('${currentNote.id}')">Удалить</button>
+      <button class="btn-save" onclick="saveNote()">Сохранить</button>
+    </div>`;
+}
+function newNote(){
+  currentNote={id:null,title:'',content:'',tags:[],folder_id:selectedFolder,created_at:new Date().toISOString(),updated_at:new Date().toISOString()};
+  const ed=document.getElementById('note-editor');
+  const folderOpts=(folders||[]).map(f=>`<option value="${f.id}" ${selectedFolder===f.id?'selected':''}>${f.icon||'📁'} ${f.name}</option>`).join('');
+  ed.innerHTML=`
+    <input class="ntitle" id="n-title" placeholder="Заголовок">
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <select id="n-folder" style="font-size:12px;padding:5px 8px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;font-family:inherit">
+        <option value="">Без папки</option>${folderOpts}
+      </select>
+    </div>
+    <div class="ntagrow" id="ntagrow"><input class="ntaginp" id="ntaginp" placeholder="+ тег" onkeydown="addNTag(event)"></div>
+    <div class="toolbar">
+      <button class="tb" onclick="fmt('**','**')"><b>Ж</b></button>
+      <button class="tb" onclick="fmt('_','_')"><i>К</i></button>
+      <button class="tb" onclick="fmt('\\n# ','')">Н1</button>
+      <button class="tb" onclick="fmt('\\n## ','')">Н2</button>
+      <button class="tb" onclick="fmt('\\n- ','')">Список</button>
+      <button class="tb" onclick="fmt('[[',']]')">[[Связь]]</button>
+    </div>
+    <textarea class="nbody" id="nbody" placeholder="Начни писать..."></textarea>
+    <div class="nsave-row"><button class="btn-save" onclick="saveNote()">Сохранить</button></div>`;
+  document.getElementById('n-title').focus();
+}
+function addNTag(e){
+  if(e.key!=='Enter')return;const v=e.target.value.trim();if(!v)return;
+  if(!currentNote.tags)currentNote.tags=[];
+  if(!currentNote.tags.includes(v))currentNote.tags.push(v);
+  e.target.value='';
+  const row=document.getElementById('ntagrow');const inp=row.querySelector('.ntaginp');
+  row.innerHTML=currentNote.tags.map(t=>`<span class="ntag" onclick="removeNTag('${t}')">${t} ×</span>`).join('');
+  row.appendChild(inp);
+}
+function removeNTag(t){
+  currentNote.tags=currentNote.tags.filter(x=>x!==t);
+  const row=document.getElementById('ntagrow');const inp=row.querySelector('.ntaginp');
+  row.innerHTML=currentNote.tags.map(x=>`<span class="ntag" onclick="removeNTag('${x}')">${x} ×</span>`).join('');
+  row.appendChild(inp);
+}
+function fmt(b,a){
+  const ta=document.getElementById('nbody');if(!ta)return;
+  const s=ta.selectionStart,e=ta.selectionEnd,sel=ta.value.substring(s,e);
+  ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);
+  ta.selectionStart=ta.selectionEnd=s+b.length+sel.length;ta.focus();
+}
+async function saveNote(){
+  const title=document.getElementById('n-title').value;
+  const content=document.getElementById('nbody').value;
+  const tags=currentNote.tags||[];
+  const folder_id=document.getElementById('n-folder').value||null;
+  const links=(content.match(/\[\[([^\]]+)\]\]/g)||[]).map(x=>x.slice(2,-2));
+  const now=new Date().toISOString();
+  try{
+    if(currentNote.id){
+      await sb('notes',{method:'PATCH',filter:`id=eq.${currentNote.id}&`,body:{title,content,tags,folder_id,links,updated_at:now},order:''});
+      notes=notes.map(n=>n.id===currentNote.id?{...n,title,content,tags,folder_id,links,updated_at:now}:n);
+      currentNote={...currentNote,title,content,tags,folder_id,links,updated_at:now};
+    }else{
+      const r=await sb('notes',{method:'POST',body:{title,content,tags,folder_id,links},order:''});
+      notes.unshift(r[0]);currentNote=r[0];
+    }
+    renderNotesList();renderDashMetrics();toast('Заметка сохранена');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
+async function deleteNote(id){
+  if(!confirm('Удалить?'))return;
+  try{
+    await sb('notes',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
+    notes=notes.filter(n=>n.id!==id);currentNote=null;renderNotesList();
+    document.getElementById('note-editor').innerHTML='<div style="margin:auto;color:var(--hint);font-size:13px">Выберите заметку или создайте новую</div>';
+    toast('Удалено');
+  }catch(e){toast('Ошибка');}
+}
+function openFolderModal(){
+  document.getElementById('fold-name').value='';selectedIcon='📁';
+  document.querySelectorAll('.icon-opt').forEach(o=>o.style.border='2px solid transparent');
+  openModal('modal-folder');
+}
+function pickIcon(ico){
+  selectedIcon=ico;document.getElementById('fold-ico').value=ico;
+  document.querySelectorAll('.icon-opt').forEach(o=>o.style.border=o.dataset.ico===ico?'2px solid var(--accent)':'2px solid transparent');
+}
+async function saveFolder(){
+  const name=document.getElementById('fold-name').value.trim();
+  const icon=document.getElementById('fold-ico').value||selectedIcon;
+  if(!name){toast('Введите название');return;}
+  try{
+    const r=await sb('note_folders',{method:'POST',body:{name,icon},order:''});
+    folders.push(r[0]);closeModal('modal-folder');renderFolders();toast('Папка создана');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
 
+// CALENDAR
+async function loadCalendar(){
+  try{events=await sb('events',{order:'start_at.asc'});renderCalendar();}catch(e){console.error(e);}
+}
+function setCalView(v){
+  calView=v;calOffset=0;
+  document.querySelectorAll('.cvtab').forEach(t=>t.classList.remove('on'));
+  document.querySelector(`[onclick*="setCalView('${v}')"]`).classList.add('on');
+  renderCalendar();
+}
+function calNav(d){calOffset+=d;renderCalendar();}
+function calToday(){calOffset=0;renderCalendar();}
+function renderCalendar(){
+  const grid=document.getElementById('cal-grid');
+  const base=new Date();
+  let days=[];
+  if(calView==='week'){
+    const start=new Date(base);start.setDate(start.getDate()-start.getDay()+1+calOffset*7);
+    for(let i=0;i<7;i++){const d=new Date(start);d.setDate(start.getDate()+i);days.push(d);}
+    document.getElementById('cal-period').textContent=`${days[0].toLocaleDateString('ru',{day:'numeric',month:'short'})} — ${days[6].toLocaleDateString('ru',{day:'numeric',month:'short'})} ${days[0].getFullYear()}`;
+  }else if(calView==='3day'){
+    const start=new Date(base);start.setDate(start.getDate()+calOffset*3);
+    for(let i=0;i<3;i++){const d=new Date(start);d.setDate(start.getDate()+i);days.push(d);}
+    document.getElementById('cal-period').textContent=`${days[0].toLocaleDateString('ru',{day:'numeric',month:'long'})} — ${days[2].toLocaleDateString('ru',{day:'numeric',month:'long'})}`;
+  }else{
+    const d=new Date(base);d.setDate(d.getDate()+calOffset);days=[d];
+    document.getElementById('cal-period').textContent=d.toLocaleDateString('ru',{weekday:'long',day:'numeric',month:'long'});
+  }
+  const dayNames=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+  const todayStr=today();
+  grid.style.display='grid';grid.style.gridTemplateColumns=`repeat(${days.length},1fr)`;grid.style.border='.5px solid var(--border)';grid.style.borderRadius='8px';grid.style.overflow='hidden';
+  grid.innerHTML=days.map(day=>{
+    const iso=day.toISOString().split('T')[0];
+    const isToday=iso===todayStr;
+    const dayEvents=events.filter(e=>e.start_at&&e.start_at.startsWith(iso));
+    const dayTasks=tasks.filter(t=>t.due_date&&t.due_date.startsWith(iso)&&!t.done);
+    const dayWorkouts=workouts.filter(w=>w.worked_out_at===iso);
+    return `<div class="cal-day-col">
+      <div class="cal-day-header ${isToday?'today':''}">
+        <span class="cal-day-date">${day.getDate()}</span>
+        <span class="cal-day-name">${dayNames[day.getDay()]}</span>
+      </div>
+      <div style="padding:8px;min-height:120px">
+        ${dayEvents.map(e=>`<div class="cal-event" onclick="deleteEvent('${e.id}')" title="${e.title} — нажми для удаления">${e.title}</div>`).join('')}
+        ${dayTasks.map(t=>`<div class="cal-event task">✓ ${t.title}</div>`).join('')}
+        ${dayWorkouts.map(w=>`<div class="cal-event workout">💪 ${w.title}</div>`).join('')}
+        <div class="cal-slot" onclick="openEventModalDate('${iso}')" style="min-height:40px;display:flex;align-items:center;justify-content:center;color:var(--hint);font-size:11px;border:none">+ событие</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function openEventModal(){
+  document.getElementById('ev-title').value='';document.getElementById('ev-note').value='';
+  document.getElementById('ev-start').value='';document.getElementById('ev-end').value='';
+  openModal('modal-event');
+}
+function openEventModalDate(iso){
+  document.getElementById('ev-title').value='';
+  document.getElementById('ev-start').value=iso+'T09:00';
+  openModal('modal-event');
+}
+async function saveEvent(){
+  const title=document.getElementById('ev-title').value.trim();
+  const start=document.getElementById('ev-start').value;
+  if(!title||!start){toast('Введите название и время');return;}
+  const end=document.getElementById('ev-end').value;
+  try{
+    const r=await sb('events',{method:'POST',body:{title,start_at:new Date(start).toISOString(),end_at:end?new Date(end).toISOString():null,color:document.getElementById('ev-color').value,notes:document.getElementById('ev-note').value},order:''});
+    events.push(r[0]);closeModal('modal-event');renderCalendar();renderDashEvents();toast('Событие добавлено');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
+async function deleteEvent(id){
+  if(!confirm('Удалить событие?'))return;
+  try{
+    await sb('events',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
+    events=events.filter(e=>e.id!=id);renderCalendar();renderDashEvents();toast('Удалено');
+  }catch(e){toast('Ошибка');}
+}
+
+// WORKOUTS
+const EXERCISES=[
+  {name:'Приседания',muscle:'Ноги',equip:'Штанга',desc:'Базовое упражнение для квадрицепсов и ягодиц'},
+  {name:'Жим лёжа',muscle:'Грудь',equip:'Штанга',desc:'Основное упражнение для грудных мышц'},
+  {name:'Становая тяга',muscle:'Спина',equip:'Штанга',desc:'Комплексное упражнение для всего тела'},
+  {name:'Подтягивания',muscle:'Спина',equip:'Без оборудования',desc:'Развивает широчайшие мышцы спины'},
+  {name:'Отжимания',muscle:'Грудь',equip:'Без оборудования',desc:'Грудь, трицепс, передние дельты'},
+  {name:'Выпады',muscle:'Ноги',equip:'Гантели',desc:'Квадрицепсы, ягодичные, баланс'},
+  {name:'Жим гантелей',muscle:'Грудь',equip:'Гантели',desc:'Грудные мышцы, контроль движения'},
+  {name:'Тяга штанги в наклоне',muscle:'Спина',equip:'Штанга',desc:'Широчайшие и средняя спина'},
+  {name:'Армейский жим',muscle:'Плечи',equip:'Штанга',desc:'Передние и средние дельты'},
+  {name:'Жим гантелей сидя',muscle:'Плечи',equip:'Гантели',desc:'Дельтовидные мышцы'},
+  {name:'Разводка гантелей',muscle:'Плечи',equip:'Гантели',desc:'Средние пучки дельт'},
+  {name:'Бицепс со штангой',muscle:'Руки',equip:'Штанга',desc:'Двуглавая мышца плеча'},
+  {name:'Молот',muscle:'Руки',equip:'Гантели',desc:'Бицепс и брахиалис'},
+  {name:'Французский жим',muscle:'Руки',equip:'Штанга',desc:'Трёхглавая мышца плеча'},
+  {name:'Трицепс на блоке',muscle:'Руки',equip:'Тренажёр',desc:'Трицепс, изолированно'},
+  {name:'Планка',muscle:'Пресс',equip:'Без оборудования',desc:'Кор, стабилизация позвоночника'},
+  {name:'Скручивания',muscle:'Пресс',equip:'Без оборудования',desc:'Прямая мышца живота'},
+  {name:'Подъём ног',muscle:'Пресс',equip:'Без оборудования',desc:'Нижняя часть пресса'},
+  {name:'Гиперэкстензия',muscle:'Спина',equip:'Тренажёр',desc:'Разгибатели спины, поясница'},
+  {name:'Жим ногами',muscle:'Ноги',equip:'Тренажёр',desc:'Квадрицепсы, ягодичные'},
+  {name:'Сгибание ног',muscle:'Ноги',equip:'Тренажёр',desc:'Бицепс бедра'},
+  {name:'Икры',muscle:'Ноги',equip:'Тренажёр',desc:'Икроножные и камбаловидные'},
+  {name:'Тяга верхнего блока',muscle:'Спина',equip:'Тренажёр',desc:'Широчайшие мышцы спины'},
+  {name:'Разводка на грудь',muscle:'Грудь',equip:'Тренажёр',desc:'Изоляция грудных мышц'},
+  {name:'Берпи',muscle:'Пресс',equip:'Без оборудования',desc:'Кардио, всё тело'},
+];
+function filterExercises(){
+  const m=document.getElementById('ex-filter-muscle').value;
+  const eq=document.getElementById('ex-filter-equip').value;
+  const s=document.getElementById('ex-search').value.toLowerCase();
+  const list=EXERCISES.filter(e=>
+    (!m||e.muscle===m)&&(!eq||e.equip===eq)&&(!s||e.name.toLowerCase().includes(s)||e.muscle.toLowerCase().includes(s))
+  );
+  document.getElementById('ex-lib').innerHTML=list.map(e=>`
+    <div class="ex-card" onclick="addExToWorkout('${e.name}','${e.muscle}')">
+      <div class="ex-name">${e.name}</div>
+      <div class="ex-muscle">${e.muscle}</div>
+      <span class="ex-tag">${e.equip}</span>
+      <div style="font-size:11px;color:var(--hint);margin-top:4px">${e.desc}</div>
+    </div>`).join('');
+}
+function addExToWorkout(name,muscle){
+  const ta=document.getElementById('w-exer');
+  if(ta){ta.value+=(ta.value?'\n':'')+name+' 3x10';toast(name+' добавлено')}
+  else{openWorkoutModal();setTimeout(()=>{const t2=document.getElementById('w-exer');if(t2)t2.value=name+' 3x10';},100);}
+}
+async function loadWorkouts(){
+  try{workouts=await sb('workouts',{order:'worked_out_at.desc'});renderWorkouts();filterExercises();}catch(e){console.error(e);}
+}
+function renderWorkouts(){
+  const days=['пн','вт','ср','чт','пт','сб','вс'];
+  const t=new Date();const ws=new Date(t);ws.setDate(t.getDate()-((t.getDay()+6)%7));
+  document.getElementById('week-dots').innerHTML=days.map((d,i)=>{
+    const day=new Date(ws);day.setDate(ws.getDate()+i);
+    const iso=day.toISOString().split('T')[0];
+    const isToday=iso===today();
+    const done=workouts.some(w=>w.worked_out_at===iso);
+    return `<div class="wd"><div class="wdl">${d}</div><div class="wdd ${done?'done':isToday?'today':''}">${done?'✓':day.getDate()}</div></div>`;
+  }).join('');
+  const el=document.getElementById('workouts-list');
+  if(!workouts.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет тренировок</div>';return;}
+  el.innerHTML=workouts.slice(0,8).map(w=>`
+    <div style="padding:10px 0;border-bottom:.5px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span style="font-size:13px;font-weight:500">💪 ${w.title}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--hint)">${w.worked_out_at} · ${w.duration_min||0} мин</span>
+          <button onclick="startRestTimer()" style="font-size:11px;padding:3px 8px;border:.5px solid var(--green);border-radius:5px;background:var(--gl);color:var(--green);cursor:pointer;font-family:inherit">⏱ Отдых</button>
+        </div>
+      </div>
+      ${(w.exercises||[]).map(e=>`<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:.5px solid var(--border)"><span>${e.name}</span><span style="color:var(--muted)">${e.sets}</span></div>`).join('')}
+      ${w.notes?`<div style="font-size:12px;color:var(--muted);margin-top:6px;font-style:italic">${w.notes}</div>`:''}
+    </div>`).join('');
+  renderMuscleStats();
+}
+function renderMuscleStats(){
+  const week7=new Date();week7.setDate(week7.getDate()-7);
+  const recent=workouts.filter(w=>new Date(w.worked_out_at)>=week7);
+  const muscleCount={};
+  recent.forEach(w=>(w.exercises||[]).forEach(e=>{
+    const ex=EXERCISES.find(x=>x.name===e.name);
+    if(ex){muscleCount[ex.muscle]=(muscleCount[ex.muscle]||0)+1;}
+  }));
+  const max=Math.max(...Object.values(muscleCount),1);
+  const el=document.getElementById('muscle-stats');
+  if(!Object.keys(muscleCount).length){el.innerHTML='<div style="color:var(--hint);font-size:12px">Нет данных за 7 дней</div>';return;}
+  el.innerHTML=Object.entries(muscleCount).sort((a,b)=>b[1]-a[1]).map(([m,c])=>`
+    <div class="mstat-row">
+      <div class="mstat-name">${m}</div>
+      <div class="mstat-bar"><div class="mstat-fill" style="width:${Math.round(c/max*100)}%"></div></div>
+      <div class="mstat-val">${c} упр.</div>
+    </div>`).join('');
+}
+function startRestTimer(){
+  restSeconds=60;
+  document.getElementById('rest-timer').classList.add('on');
+  document.getElementById('rest-time').textContent=restSeconds;
+  clearInterval(restInterval);
+  restInterval=setInterval(()=>{
+    restSeconds--;document.getElementById('rest-time').textContent=restSeconds;
+    if(restSeconds<=0){clearInterval(restInterval);document.getElementById('rest-timer').classList.remove('on');toast('Отдых закончен! Следующий подход 💪');}
+  },1000);
+}
+function stopRest(){clearInterval(restInterval);document.getElementById('rest-timer').classList.remove('on');}
+function openWorkoutModal(){
+  document.getElementById('w-title').value='';document.getElementById('w-exer').value='';document.getElementById('w-notes').value='';
+  document.getElementById('w-date').value=today();document.getElementById('w-dur').value='60';
+  openModal('modal-workout');
+}
+async function saveWorkout(){
+  const title=document.getElementById('w-title').value.trim();
+  if(!title){toast('Введите название');return;}
+  const lines=document.getElementById('w-exer').value.split('\n').filter(l=>l.trim());
+  const exercises=lines.map(l=>{const p=l.trim().match(/^(.+?)\s+(\d+x\S+.*?)(?:\s+(\S+))?$/);return p?{name:p[1].trim(),sets:p[2]+(p[3]?' '+p[3]:'')}: {name:l.trim(),sets:''};});
+  try{
+    const r=await sb('workouts',{method:'POST',body:{title,worked_out_at:document.getElementById('w-date').value||today(),duration_min:+document.getElementById('w-dur').value||0,exercises,notes:document.getElementById('w-notes').value},order:''});
+    workouts.unshift(r[0]);closeModal('modal-workout');renderWorkouts();renderCalendar();renderDashMetrics();toast('Тренировка добавлена');
+  }catch(e){toast('Ошибка: '+e.message);}
+}
+
+// NUTRITION
+async function loadNutrition(){
+  try{meals=await sb('nutrition_log',{filter:`logged_at=gte.${today()}T00:00:00&`,order:'logged_at.asc'});renderNutrition();}catch(e){console.error(e);}
+}
 function renderNutrition(){
   const kcal=meals.reduce((s,m)=>s+m.calories,0);
   const prot=meals.reduce((s,m)=>s+(+m.protein||0),0);
@@ -949,198 +1177,103 @@ function renderNutrition(){
   document.getElementById('mac-f').textContent=Math.round(fat)+'г';
   const el=document.getElementById('meals-list');
   if(!meals.length){el.innerHTML='<div style="color:var(--hint);font-size:13px">Нет записей. Добавьте приём пищи!</div>';return;}
-  el.innerHTML=meals.map(m=>`
-    <div class="meal-row">
-      <span class="meal-name">${m.meal_name}</span>
-      <span class="meal-kcal">${m.calories} ккал · Б${Math.round(m.protein)}г У${Math.round(m.carbs)}г Ж${Math.round(m.fat)}г</span>
-      <button class="meal-del" onclick="deleteMeal('${m.id}')"><svg viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M9 6V4h6v2"/></svg></button>
-    </div>`).join('');
+  el.innerHTML=meals.map(m=>`<div class="meal-row"><span class="meal-name">${m.meal_name}</span><span class="meal-k">${m.calories} ккал · Б${Math.round(m.protein)}г У${Math.round(m.carbs)}г Ж${Math.round(m.fat)}г</span><button class="meal-del" onclick="deleteMeal('${m.id}')">✕</button></div>`).join('');
 }
-
-function openFoodModal(){
-  ['f-name','f-kcal','f-prot','f-carb','f-fat'].forEach(id=>document.getElementById(id).value='');
-  openModal('modal-food');
-}
-
+function openFoodModal(){['f-name','f-kcal','f-prot','f-carb','f-fat'].forEach(id=>document.getElementById(id).value='');openModal('modal-food');}
 async function saveFood(){
   const name=document.getElementById('f-name').value.trim();
   if(!name){toast('Введите название');return;}
-  const data={meal_name:name,calories:+document.getElementById('f-kcal').value||0,protein:+document.getElementById('f-prot').value||0,carbs:+document.getElementById('f-carb').value||0,fat:+document.getElementById('f-fat').value||0};
   try{
-    const r=await sb('nutrition_log',{method:'POST',body:data,order:''});
-    meals.push(r[0]);
-    closeModal('modal-food');
-    renderNutrition();
-    renderDashMeals();
-    renderDashMetrics();
-    toast('Приём пищи добавлен');
+    const r=await sb('nutrition_log',{method:'POST',body:{meal_name:name,calories:+document.getElementById('f-kcal').value||0,protein:+document.getElementById('f-prot').value||0,carbs:+document.getElementById('f-carb').value||0,fat:+document.getElementById('f-fat').value||0},order:''});
+    meals.push(r[0]);closeModal('modal-food');renderNutrition();renderDashMeals();renderDashMetrics();toast('Добавлено');
   }catch(e){toast('Ошибка: '+e.message);}
 }
-
 async function deleteMeal(id){
   try{
     await sb('nutrition_log',{method:'DELETE',filter:`id=eq.${id}&`,order:''});
-    meals=meals.filter(m=>m.id!=id);
-    renderNutrition();
-    renderDashMeals();
-    renderDashMetrics();
-    toast('Удалено');
+    meals=meals.filter(m=>m.id!=id);renderNutrition();renderDashMeals();renderDashMetrics();toast('Удалено');
   }catch(e){toast('Ошибка');}
 }
-
-// ── AI FOOD ──
-function openAiFood(){
-  document.getElementById('ai-photo').value='';
-  document.getElementById('ai-result').style.display='none';
-  document.getElementById('ai-analyze-btn').style.display='';
-  document.getElementById('ai-save-btn').style.display='none';
-  aiMealData=null;
-  openModal('modal-ai-food');
-}
-
+function openAiFood(){document.getElementById('ai-photo').value='';document.getElementById('ai-res').style.display='none';document.getElementById('ai-btn').style.display='';document.getElementById('ai-save-btn').style.display='none';aiMealData=null;openModal('modal-ai-food');}
 async function analyzeFood(){
   const file=document.getElementById('ai-photo').files[0];
   if(!file){toast('Выберите фото');return;}
-  const btn=document.getElementById('ai-analyze-btn');
-  btn.textContent='Анализирую...'; btn.disabled=true;
+  const btn=document.getElementById('ai-btn');btn.textContent='Анализирую...';btn.disabled=true;
   try{
     const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':CLAUDE_KEY,'anthropic-version':'2023-06-01'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,messages:[{role:'user',content:[
-        {type:'image',source:{type:'base64',media_type:file.type,data:b64}},
-        {type:'text',text:'Определи блюдо на фото и оцени КБЖУ. Ответь строго в формате JSON: {"name":"название блюда","calories":число,"protein":число,"carbs":число,"fat":число}. Только JSON, без текста.'}
-      ]}]})
-    });
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':AK,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type,data:b64}},{type:'text',text:'Определи блюдо на фото и оцени КБЖУ. Ответь строго в формате JSON: {"name":"название","calories":число,"protein":число,"carbs":число,"fat":число}. Только JSON.'}]}]})});
     const data=await resp.json();
-    const text=data.content[0].text;
-    const json=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const json=JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
     aiMealData=json;
-    const res=document.getElementById('ai-result');
-    res.style.display='block';
-    res.innerHTML=`<strong>${json.name}</strong><br>${json.calories} ккал · Белки ${json.protein}г · Углеводы ${json.carbs}г · Жиры ${json.fat}г`;
-    document.getElementById('ai-save-btn').style.display='';
-    btn.style.display='none';
+    const res=document.getElementById('ai-res');res.style.display='block';
+    res.innerHTML=`<strong>${json.name}</strong><br>${json.calories} ккал · Б${json.protein}г · У${json.carbs}г · Ж${json.fat}г`;
+    document.getElementById('ai-save-btn').style.display='';btn.style.display='none';
   }catch(e){toast('Ошибка AI: '+e.message);}
-  btn.textContent='Анализировать'; btn.disabled=false;
+  btn.textContent='Анализировать';btn.disabled=false;
 }
-
 async function saveAiFood(){
   if(!aiMealData)return;
   try{
     const r=await sb('nutrition_log',{method:'POST',body:{meal_name:aiMealData.name,calories:aiMealData.calories,protein:aiMealData.protein,carbs:aiMealData.carbs,fat:aiMealData.fat},order:''});
-    meals.push(r[0]);
-    closeModal('modal-ai-food');
-    renderNutrition();
-    renderDashMeals();
-    renderDashMetrics();
-    toast('Добавлено: '+aiMealData.name);
+    meals.push(r[0]);closeModal('modal-ai-food');renderNutrition();renderDashMeals();renderDashMetrics();toast('Добавлено: '+aiMealData.name);
   }catch(e){toast('Ошибка: '+e.message);}
 }
 
-// ── WORKOUTS ──
-async function loadWorkouts(){
-  try{
-    workouts=await sb('workouts',{order:'worked_out_at.desc'});
-    renderWorkouts();
-  }catch(e){console.error(e);}
-}
-
-function renderWorkouts(){
-  const days=['пн','вт','ср','чт','пт','сб','вс'];
-  const today=new Date();
-  const weekStart=new Date(today);
-  weekStart.setDate(today.getDate()-((today.getDay()+6)%7));
-  const el=document.getElementById('week-dots');
-  el.innerHTML=days.map((d,i)=>{
-    const day=new Date(weekStart); day.setDate(weekStart.getDate()+i);
-    const iso=day.toISOString().split('T')[0];
-    const isToday=iso===today.toISOString().split('T')[0];
-    const done=workouts.some(w=>w.worked_out_at===iso);
-    return `<div class="wd"><div class="wd-lbl">${d}</div>
-      <div class="wd-dot ${done?'done':isToday?'today':''}">${done?'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':day.getDate()}</div></div>`;
-  }).join('');
-
-  const list=document.getElementById('workouts-list');
-  if(!workouts.length){list.innerHTML='<div style="color:var(--hint);font-size:13px">Нет тренировок. Добавьте первую!</div>';return;}
-  list.innerHTML=workouts.slice(0,10).map(w=>`
-    <div style="padding:10px 0;border-bottom:0.5px solid var(--border)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <span style="font-size:13px;font-weight:500">${w.title}</span>
-        <span style="font-size:11px;color:var(--hint)">${w.worked_out_at} · ${w.duration_min||0} мин</span>
-      </div>
-      ${(w.exercises||[]).map(e=>`<div class="ex-row"><span class="ex-name">${e.name}</span><span class="ex-sets">${e.sets}</span></div>`).join('')}
-    </div>`).join('');
-}
-
-function openWorkoutModal(){
-  ['w-title','w-exer'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('w-date').value=new Date().toISOString().split('T')[0];
-  document.getElementById('w-dur').value='60';
-  openModal('modal-workout');
-}
-
-async function saveWorkout(){
-  const title=document.getElementById('w-title').value.trim();
-  if(!title){toast('Введите название');return;}
-  const lines=document.getElementById('w-exer').value.split('\n').filter(l=>l.trim());
-  const exercises=lines.map(l=>{const p=l.trim().match(/^(.+?)\s+(\S+)$/);return p?{name:p[1],sets:p[2]}:{name:l.trim(),sets:''};});
-  const data={title,worked_out_at:document.getElementById('w-date').value||new Date().toISOString().split('T')[0],duration_min:+document.getElementById('w-dur').value||0,exercises};
-  try{
-    const r=await sb('workouts',{method:'POST',body:data,order:''});
-    workouts.unshift(r[0]);
-    closeModal('modal-workout');
-    renderWorkouts();
-    renderDashMetrics();
-    toast('Тренировка добавлена');
-  }catch(e){toast('Ошибка: '+e.message);}
-}
-
-// ── GALLERY ──
+// GALLERY
 async function loadGallery(){
-  try{
-    files=await sb('files',{order:'created_at.desc'});
-    renderGallery();
-  }catch(e){console.error(e);}
+  try{files=await sb('files',{order:'created_at.desc'});renderGallery();}catch(e){console.error(e);}
 }
-
 function renderGallery(){
+  const icons={image:'🖼',pdf:'📄',doc:'📝',video:'🎬'};
   const el=document.getElementById('gal-grid');
-  const icons={image:'<svg viewBox="0 0 24 24" width="28" height="28" stroke="var(--hint)" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',pdf:'<svg viewBox="0 0 24 24" width="28" height="28" stroke="#A32D2D" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',doc:'<svg viewBox="0 0 24 24" width="28" height="28" stroke="#185FA5" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',video:'<svg viewBox="0 0 24 24" width="28" height="28" stroke="#534AB7" fill="none" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'};
-  el.innerHTML=(files.length?files.map(f=>`
-    <div class="gal-item" onclick="window.open('${f.url}','_blank')">
-      <div class="gal-thumb">
-        ${f.file_type==='image'&&f.preview_url?`<img src="${f.preview_url}" alt="${f.name}" onerror="this.parentNode.innerHTML='${(icons[f.file_type]||icons.image).replace(/'/g,"\\'")}'">`:icons[f.file_type]||icons.image}
-      </div>
-      <div class="gal-name">${f.name}</div>
-    </div>`).join(''):'')
-  +`<div class="gal-item gal-upload" onclick="openFileModal()">
-    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-    Добавить файл
-  </div>`;
+  el.innerHTML=(files.length?files.map(f=>`<div class="gal-item" onclick="window.open('${f.url}','_blank')">
+    <div class="gal-thumb" style="font-size:32px">${icons[f.file_type]||'📁'}</div>
+    <div class="gal-name">${f.name}</div></div>`).join(''):'')+
+    `<div class="gal-item" onclick="openFileModal()" style="border:1.5px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:var(--hint);font-size:12px;cursor:pointer">
+    <span style="font-size:24px;margin-bottom:6px">+</span>Добавить файл</div>`;
 }
-
-function openFileModal(){
-  ['fi-name','fi-url'].forEach(id=>document.getElementById(id).value='');
-  openModal('modal-file');
-}
-
+function openFileModal(){document.getElementById('fi-name').value='';document.getElementById('fi-url').value='';openModal('modal-file');}
 async function saveFile(){
-  const name=document.getElementById('fi-name').value.trim();
-  const url=document.getElementById('fi-url').value.trim();
+  const name=document.getElementById('fi-name').value.trim();const url=document.getElementById('fi-url').value.trim();
   if(!name||!url){toast('Заполните все поля');return;}
   try{
     const r=await sb('files',{method:'POST',body:{name,url,file_type:document.getElementById('fi-type').value},order:''});
-    files.unshift(r[0]);
-    closeModal('modal-file');
-    renderGallery();
-    toast('Файл добавлен');
+    files.unshift(r[0]);closeModal('modal-file');renderGallery();toast('Файл добавлен');
   }catch(e){toast('Ошибка: '+e.message);}
 }
 
-// ── INIT ──
-loadDashboard();
+// GLOBAL SEARCH
+async function globalSearch(){
+  const q=document.getElementById('gsearch-inp').value.trim().toLowerCase();
+  const el=document.getElementById('gsearch-res');
+  if(!q){el.innerHTML='';return;}
+  const results=[];
+  notes.filter(n=>(n.title+n.content).toLowerCase().includes(q)).forEach(n=>results.push({type:'Заметка',title:n.title||'Без названия',preview:(n.content||'').slice(0,80),page:'notes',id:n.id}));
+  tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>results.push({type:'Задача',title:t.title,preview:t.priority,page:'tasks'}));
+  meals.filter(m=>m.meal_name.toLowerCase().includes(q)).forEach(m=>results.push({type:'Питание',title:m.meal_name,preview:m.calories+' ккал',page:'nutrition'}));
+  workouts.filter(w=>w.title.toLowerCase().includes(q)).forEach(w=>results.push({type:'Тренировка',title:w.title,preview:w.worked_out_at,page:'workouts'}));
+  if(!results.length){el.innerHTML='<div style="color:var(--hint);font-size:13px;padding:16px 0">Ничего не найдено</div>';return;}
+  el.innerHTML=results.slice(0,20).map(r=>`<div class="gres-item" onclick="go('${r.page}')">
+    <div class="gres-type">${r.type}</div>
+    <div class="gres-title">${r.title}</div>
+    <div class="gres-prev">${r.preview||''}</div></div>`).join('');
+}
+
+// INIT — создаём таблицы если их нет
+async function initTables(){
+  const tables=['events','note_folders'];
+  for(const t of tables){
+    try{await sb(t,{limit:'1'});}
+    catch(e){
+      if(e.message.includes('42P01')||e.message.includes('relation')){
+        console.log('Таблица '+t+' не найдена, нужно создать через SQL Editor');
+      }
+    }
+  }
+}
+
+initTables();
+loadDash();
 </script>
 </body>
 </html>
